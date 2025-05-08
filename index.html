@@ -1,0 +1,119 @@
+<!-- Tells the browser this is a HTML5 document -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Set character encoding to the default HTML-5 Standard (which is UTF-8)-->
+    <meta charset="UTF-8">
+
+    <!-- Makes the website responsive on mobile and tablet screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Lexchange - Home</title>
+
+    <!-- Bootstrap 5 CSS (latest version) from jsdelivr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- Bootstrap 5 JS  -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+
+    <!-- Link to custom stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+    <!-- Navbar will be injected here -->
+    <div id="navbar-container"></div>
+
+    <!-- Main Content -->
+
+    <!-- my5 means m:margin y:vertical direction (top and bottom) 5:size, so my-2 adds margin to top and bottom of scale 5-->
+    <main class="container my-5">
+    
+        <!-- Hero Section: Big headline, subheading, and call-to-action button -->
+        <div class="text-center mb-5">
+            <!-- 'display-4' gives a big headline, 'fw-bold' makes it bold -->
+            <h1 class="display-4 fw-bold">Language exchange, without the weirdos.</h1>
+    
+            <!-- 'lead' gives a nicely styled subheading -->
+            <p class="lead">Find real people. Have real conversations. Learn together.</p>
+    
+            <!-- Bootstrap button linking to the profile setup page -->
+            <a href="profile.html" class="btn btn-primary btn-lg mt-3">Get Started</a>
+        </div>
+    
+        <!-- Horizontal line to separate sections -->
+        <hr class="my-5">
+    
+        <!-- Features Section: 3-column layout using Bootstrap Grid -->
+        <div class="row text-center">
+    
+            <!-- Feature 1 -->
+            <div class="col-md-4 mb-4">
+                <h3>🔒 Safe & Respectful</h3>
+                <p>Profiles are avatar-based, and reporting tools help keep the platform secure and respectful.</p>
+            </div>
+    
+            <!-- Feature 2 -->
+            <div class="col-md-4 mb-4">
+                <h3>🌍 Global Connections</h3>
+                <p>Connect with language learners from around the world — teach one skill, learn another.</p>
+            </div>
+    
+            <!-- Feature 3 -->
+            <div class="col-md-4 mb-4">
+                <h3>🧠 Mutual Learning</h3>
+                <p>Exchange knowledge in a structured, balanced way — no teaching degree required.</p>
+            </div>
+        </div>
+    
+        <!-- Optional testimonial/quote section -->
+        <div class="text-center mt-5">
+            <blockquote class="blockquote">
+                <p class="mb-0 fst-italic">"Lexchange helped me take my basic French to a conversational level in a year!.
+                    It just works!"</p>
+                <footer class="blockquote-footer mt-2">Early Beta Tester</footer>
+            </blockquote>
+        </div>
+    
+        <!-- Final call-to-action at the bottom -->
+        <div class="text-center mt-5">
+            <a href="profile.html" class="btn btn-outline-primary btn-lg">Start Your Profile</a>
+        </div>
+    
+    </main>
+
+
+    <!-- Footer will be injected here -->
+    <div id="footer-container"></div>
+
+
+    <!-- Inject navbar dynamically -->
+    <script>
+        // This function handles loading external HTML into a specific container on the page
+        // Params: targetID: Element ID (e.g. navbar-container), filePath: relative path to HTML file (e.g. components/navbar.html)
+        const injectHTML = (targetId, filePath) => {
+            // Use fetch API to load external HTML file
+            fetch(filePath)
+                // Convert response to plaintext
+                .then(response => response.text())
+                // Insert HTML into target element by ID
+                .then(data => {
+                    document.getElementById(targetId).innerHTML = data;
+                })
+                // If there's an error, log to console
+                .catch(error => console.error(`Error loading ${filePath}:`, error));
+        };
+
+        // Inject navbar into div id navbar-container
+        injectHTML("navbar-container", "components/navbar.html");
+
+        // Inject footer into div id footer-container
+        injectHTML("footer-container", "components/footer.html");
+    </script>
+
+</body>
+
+</html>

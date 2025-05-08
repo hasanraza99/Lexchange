@@ -1,0 +1,27 @@
+/* General layout tweaks */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fdfdfd;
+    color: #222;
+}
+
+/* Custom primary button color (for fun + distinction) */
+.btn-primary {
+    background-color: #4b7bec;
+    border-color: #4b7bec;
+}
+
+.btn-primary:hover {
+    background-color: #3867d6;
+}
+
+/* Make emoji avatars bigger */
+#avatar {
+    font-size: 1.5rem;
+}
+
+/* Center profile form nicely on wide screens */
+#profile-form {
+    max-width: 600px;
+    margin: 0 auto;
+}

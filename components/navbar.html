@@ -1,0 +1,30 @@
+<!-- Main navigation bar that appears on all pages -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <!-- Site name/Logo that links to homepage-->
+        <a class="navbar-brand" href="index.html">Lexchange</a>
+
+        <!-- Mobile hamburger menu button for smaller screens -->
+        <!-- button - html element
+             navbar-toggler - hamburger icon bootstrap specific class
+             type button - acts like a normal clickable element (doesn't submit a form) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavBar">
+            <!-- Use span because it is inline-->
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navigation links -->
+        <div class="collapse navbar-collapse" id="mainNavBar">
+            <!-- ms auto pushes links to the right side of the navbar -->
+            <ul class="navbar-nav ms-auto">
+                <!-- Each list item is a nav link to a different page -->
+                <li class="nav-item"><a class="nav-link" href="browse.html">Browse</a></li>
+                <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+                <li class="nav-item"><a class="nav-link" href="practice.html">Practice</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
