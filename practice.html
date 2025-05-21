@@ -9,10 +9,15 @@
     <!-- Makes the website responsive on mobile and tablet screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Practice</title>
+    <title>Lexchange - Home</title>
 
     <!-- Bootstrap 5 CSS (latest version) from jsdelivr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <!-- AOS Scroll Animations -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- AOS Scroll Animations JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
     <!-- Bootstrap 5 JS  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -20,6 +25,7 @@
 
     <!-- Link to custom stylesheet -->
     <link rel="stylesheet" href="css/style.css" />
+
 </head>
 
 <body>
@@ -30,38 +36,38 @@
     <!-- Main Content -->
 
     <!-- my5 means m:margin y:vertical direction (top and bottom) 5:size, so my-2 adds margin to top and bottom of scale 5-->
-    <main class="container my-5">
-        <h1>Practice</h1>
-        <p>Placeholder</p>
+    <main class="container py-5">
+        <section class="text-center mb-5">
+            <h1 class="fw-bold">Practice Prompts</h1>
+            <p class="lead">Use these conversation starters to guide your language exchange sessions.</p>
+        </section>
+
+        <section class="row g-4">
+            <div class="col-md-6" data-aos="fade-up">
+                <div class="p-4 border rounded h-100">
+                    <h5>🌟 Beginner</h5>
+                    <ul class="list-unstyled">
+                        <li>• What’s your daily routine?</li>
+                        <li>• Describe your family.</li>
+                        <li>• What’s your favourite food?</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-4 border rounded h-100">
+                    <h5>🚀 Advanced</h5>
+                    <ul class="list-unstyled">
+                        <li>• What’s your opinion on social media's impact?</li>
+                        <li>• What would you do if you won the lottery?</li>
+                        <li>• Describe a cultural difference you find fascinating.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Footer will be injected here -->
     <div id="footer-container"></div>
-
-
-    <!-- Inject navbar dynamically -->
-    <script>
-        // This function handles loading external HTML into a specific container on the page
-        // Params: targetID: Element ID (e.g. navbar-container), filePath: relative path to HTML file (e.g. components/navbar.html)
-        const injectHTML = (targetId, filePath) => {
-            // Use fetch API to load external HTML file
-            fetch(filePath)
-                // Convert response to plaintext
-                .then(response => response.text())
-                // Insert HTML into target element by ID
-                .then(data => {
-                    document.getElementById(targetId).innerHTML = data;
-                })
-                // If there's an error, log to console
-                .catch(error => console.error(`Error loading ${filePath}:`, error));
-        };
-
-        // Inject navbar into div id navbar-container
-        injectHTML("navbar-container", "components/navbar.html");
-
-        // Inject footer into div id footer-container
-        injectHTML("footer-container", "components/footer.html");
-    </script>
 
 </body>
 

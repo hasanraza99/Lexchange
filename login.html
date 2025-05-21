@@ -1,3 +1,4 @@
+<!-- login.html -->
 <!-- Tells the browser this is a HTML5 document -->
 <!DOCTYPE html>
 <html lang="en">
@@ -34,37 +35,24 @@
     <div id="navbar-container"></div>
 
     <!-- Main Content -->
-
-    <!-- my5 means m:margin y:vertical direction (top and bottom) 5:size, so my-2 adds margin to top and bottom of scale 5-->
     <main class="container py-5">
-        <section class="text-center mb-5">
-            <h1 class="fw-bold">My Dashboard</h1>
-            <p class="lead">Track your learning activity and recent matches.</p>
-        </section>
-
-        <section class="row g-4">
-            <div class="col-md-6" data-aos="fade-up">
-                <div class="p-4 border rounded h-100">
-                    <h5>📊 Activity Summary</h5>
-                    <ul class="list-unstyled">
-                        <li>• 4 active matches</li>
-                        <li>• 6 sessions completed</li>
-                        <li>• 3 pending messages</li>
-                    </ul>
+        <section class="mx-auto" style="max-width: 400px;" data-aos="fade-up">
+            <h1 class="text-center fw-bold mb-4">Login to Lexchange</h1>
+            <form id="login-form">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="email" required />
                 </div>
-            </div>
-            <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-4 border rounded h-100">
-                    <h5>👥 Recent Matches</h5>
-                    <ul class="list-unstyled">
-                        <li>• 🐱 Leo (Spanish)</li>
-                        <li>• 🦉 Sarah (French)</li>
-                        <li>• 🧠 Aisha (Arabic)</li>
-                    </ul>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" required />
                 </div>
-            </div>
+                <button type="submit" class="btn btn-primary w-100">Login</button>
+            </form>
+            <p class="text-center mt-3 small">No account? <a href="profile.html">Create one</a></p>
         </section>
     </main>
+
 
     <!-- Footer will be injected here -->
     <div id="footer-container"></div>
