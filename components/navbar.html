@@ -1,30 +1,72 @@
-<!-- Main navigation bar that appears on all pages -->
+<!-- 
+    Enhanced mobile-friendly navigation
+    This navbar uses Bootstrap's responsive classes to provide:
+    1. A clean desktop experience with horizontal links
+    2. A mobile-friendly experience with a collapsible menu
+    3. Visual cues for the current page
+-->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <!-- Site name/Logo that links to homepage-->
-        <a class="navbar-brand" href="index.html">Lexchange</a>
+    <div class="container">
+        <!-- 
+            Brand/logo with appropriate sizing
+            The brand should be visible and properly sized on all devices
+        -->
+        <a class="navbar-brand d-flex align-items-center" href="index.html">
+            <!-- You could add an actual logo image here -->
+            <span class="fs-4 fw-bold">Lexchange</span>
+        </a>
 
-        <!-- Mobile hamburger menu button for smaller screens -->
-        <!-- button - html element
-             navbar-toggler - hamburger icon bootstrap specific class
-             type button - acts like a normal clickable element (doesn't submit a form) -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavBar">
-            <!-- Use span because it is inline-->
+        <!-- 
+            Mobile hamburger menu button
+            This button only appears on small screens (controlled by navbar-expand-lg)
+            The aria attributes improve accessibility for screen readers
+        -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavBar"
+            aria-controls="mainNavBar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Navigation links -->
+        <!-- 
+            Navigation links container
+            This div will collapse on small screens and expand on larger ones
+        -->
         <div class="collapse navbar-collapse" id="mainNavBar">
-            <!-- ms auto pushes links to the right side of the navbar -->
+            <!-- 
+                ms-auto pushes the nav links to the right side
+                navbar-nav provides styling for the navigation links
+            -->
             <ul class="navbar-nav ms-auto">
-                <!-- Each list item is a nav link to a different page -->
-                <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-                <li class="nav-item"><a class="nav-link" href="browse.html">Browse</a></li>
-                <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
-                <li class="nav-item"><a class="nav-link" href="practice.html">Practice</a></li>
-                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="report.html">Report</a></li>
-                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                <!-- 
+                    Each nav item can be "active" to show the current page
+                    JavaScript could be used to set this dynamically based on the current page
+                -->
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="browse.html">Browse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="profile.html">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="practice.html">Practice</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="report.html">Report</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="dashboard.html">Dashboard</a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+                    <button id="theme-toggle" class="btn btn-sm btn-outline-primary">
+                        <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
+                    </button>
+                </li>
             </ul>
         </div>
     </div>

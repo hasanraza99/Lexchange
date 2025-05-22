@@ -21,7 +21,13 @@
 
     <!-- Bootstrap 5 JS  -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
+
+    <!-- Custom JavaScript scripts -->
+    <script defer src="js/components.js"></script>
+    <script defer src="js/theme.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/content.js"></script>
+    <script defer src="js/main.js"></script>
 
     <!-- Link to custom stylesheet -->
     <link rel="stylesheet" href="css/style.css" />
@@ -29,10 +35,9 @@
 </head>
 
 <body>
-
     <!-- Navbar will be injected here -->
-    <div id="navbar-container"></div>
-    
+    <header id="navbar-container"></header>
+
     <!-- Main Content -->
     <main class="container py-5">
         <!-- Page Heading -->
@@ -40,35 +45,47 @@
             <h1 class="fw-bold">Browse Language Partners</h1>
             <p class="lead">Explore other users and find your perfect match based on language preferences.</p>
         </section>
-    
+
+        <!-- Search Filter Section -->
+        <section class="mb-4">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search by language or name...">
+                        <button class="btn btn-primary" type="button">Find Partners</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Match Cards Section -->
-        <section class="row g-4">
-            <div class="col-md-4" data-aos="fade-up">
-                <div class="p-4 border rounded shadow-sm h-100">
-                    <h4>🦉 Sarah</h4>
-                    <p><strong>Teaches:</strong> French</p>
-                    <p><strong>Wants to learn:</strong> English</p>
-                    <p class="small">"Bonjour! I can help you with conversational French."</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
-                </div>
+        <section class="row g-4" id="partners-container">
+            <!-- Partner cards will be loaded here dynamically -->
+            <div class="col-12 text-center" id="loading-partners">
+                <p>Loading partners...</p>
             </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-4 border rounded shadow-sm h-100">
-                    <h4>🐱 Leo</h4>
-                    <p><strong>Teaches:</strong> Spanish</p>
-                    <p><strong>Wants to learn:</strong> Arabic</p>
-                    <p class="small">"Looking to practice Arabic in exchange for Spanish help!"</p>
-                    <a href="#" class="btn btn-outline-primary btn-sm">View Profile</a>
-                </div>
-            </div>
-            <!-- Add more cards as needed -->
+        </section>
+
+        <!-- Pagination section -->
+        <section class="d-flex justify-content-center mt-4">
+            <nav aria-label="Partner navigation">
+                <ul class="pagination">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </section>
     </main>
-    
-    
-    <!-- Footer will be injected here -->
-    <div id="footer-container"></div>
 
+    <!-- Footer will be injected here -->
+    <footer id="footer-container"></footer>
 </body>
 
 </html>

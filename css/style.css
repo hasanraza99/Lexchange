@@ -1,27 +1,207 @@
-/* General layout tweaks */
-body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #fdfdfd;
-    color: #222;
+/* Core theme variables */
+:root {
+    /* Primary colors */
+    --primary: #4b7bec;
+    --primary-dark: #3867d6;
+    --text: #2d3436;
+    --border: #e9ecef;
+    --success: #20bf6b;
+    --danger: #eb3b5a;
+
+    /* Light theme (default) */
+    --bg: #fdfdfd;
+    --card-bg: #ffffff;
+
+    /* Layout */
+    --radius: 0.5rem;
+    --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    --shadow-hover: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --transition: 0.3s;
 }
 
-/* Custom primary button color (for fun + distinction) */
+/* Dark theme */
+.dark-theme {
+    --bg: #222831;
+    --card-bg: #393e46;
+    --text: #eeeeee;
+    --border: #4f5662;
+}
+
+/* Base styles */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background-color var(--transition), color var(--transition);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Components */
+.card,
+.border.rounded,
+.navbar,
+footer {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border) !important;
+    border-radius: var(--radius) !important;
+    box-shadow: var(--shadow);
+    transition: all var(--transition);
+}
+
+.card:hover,
+.border.rounded:hover {
+    box-shadow: var(--shadow-hover);
+}
+
+/* Buttons */
 .btn-primary {
-    background-color: #4b7bec;
-    border-color: #4b7bec;
+    background-color: var(--primary);
+    border-color: var(--primary);
+    transition: all var(--transition);
 }
 
 .btn-primary:hover {
-    background-color: #3867d6;
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
-/* Make emoji avatars bigger */
+.btn-outline-primary {
+    color: var(--primary);
+    border-color: var(--primary);
+    transition: all var(--transition);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Navigation */
+.navbar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary) !important;
+}
+
+.nav-link {
+    font-weight: 500;
+    transition: color var(--transition);
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary) !important;
+}
+
+/* Forms */
+.form-control {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    transition: all var(--transition);
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(75, 123, 236, 0.25);
+}
+
+/* Form validation */
+.is-invalid {
+    border-color: var(--danger) !important;
+}
+
+.is-valid {
+    border-color: var(--success) !important;
+}
+
+/* Special components */
+.partner-card {
+    height: 100%;
+    transition: transform var(--transition);
+}
+
+.partner-card:hover {
+    transform: translateY(-5px);
+}
+
+.hero-section {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 3rem 0;
+    border-radius: 0 0 var(--radius) var(--radius);
+}
+
 #avatar {
     font-size: 1.5rem;
 }
 
-/* Center profile form nicely on wide screens */
 #profile-form {
     max-width: 600px;
     margin: 0 auto;
 }
+
+/* Simple loading indicator */
+.loading-indicator {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.5rem;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive adjustments */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-section {
+        padding: 4rem 0;
+    }
+
+    .partner-card {
+        padding: 1.5rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        padding: 1rem 3rem;
+    }
+
+    .partner-card:hover {
+        transform: translateY(-8px);
+    }
+}
+
+/* Touch device enhancements */
+@media (pointer: coarse) {
+
+    .btn,
+    .form-control {
+        min-height: 44px;
+    } }
