@@ -33,7 +33,63 @@ const languagePartners = [
       teaches: "German",
       learns: "Italian",
       bio: "Hallo! Let's learn German together."
-    }
+    },
+    {
+      id: 5,
+      name: "Anna",
+      avatar: "🐰",
+      teaches: "Italian",
+      learns: "German",
+      bio: "Ciao! I can help you with Italian."
+    },
+    {
+      id: 6,
+      name: "Tom",
+      avatar: "🐢",
+      teaches: "English",
+      learns: "French",
+      bio: "Hi! Let's practice English and French."
+    },
+    {
+      id: 7,
+      name: "Lina",
+      avatar: "🐸",
+      teaches: "Chinese",
+      learns: "English",
+      bio: "你好! I can help you with Chinese."
+    },
+    {
+      id: 8,
+      name: "Mark",
+      avatar: "🐷",
+      teaches: "English",
+      learns: "Chinese",
+      bio: "Hello! Let's practice English and Chinese."
+    },
+    {
+      id: 9,
+      name: "Emma",
+      avatar: "🐵",
+      teaches: "Spanish",
+      learns: "English",
+      bio: "Hola! I can help you with Spanish."
+    },
+    {
+      id: 10,
+      name: "Lucas",
+      avatar: "🐸",
+      teaches: "French",
+      learns: "Spanish",
+      bio: "Bonjour! Let's learn French together."
+    },
+    {
+      id: 11,
+      name: "Sophia",
+      avatar: "🐶",
+      teaches: "English",
+      learns: "German",
+      bio: "Hello! I'd love to practice German with native speakers." 
+    },
   ];
   
   // ============ PARTNER LOADING FUNCTIONS ============
@@ -75,17 +131,13 @@ function loadPartners() {
     }
   }
   
-  // Filter partners based on search term
-  function filterPartners(searchTerm) {
-    const container = document.getElementById('partners-container');
-    const noResults = document.getElementById('no-results');
-    if (!container) return;
-  
-    // Clear container
-    container.innerHTML = '';
-  
+// Filter partners based on search term with pagination
+function filterPartners(searchTerm) {
+    // Reset to first page when filtering
+    currentPage = 1;
+    
     // Filter partners based on search term
-    const filteredPartners = searchTerm ? 
+    allFilteredPartners = searchTerm ? 
       languagePartners.filter(partner => 
         partner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         partner.teaches.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -93,21 +145,11 @@ function loadPartners() {
         partner.bio.toLowerCase().includes(searchTerm.toLowerCase())
       ) : languagePartners;
   
-    // Show/hide no results message
-    if (filteredPartners.length === 0) {
-      if (noResults) noResults.classList.remove('d-none');
-    } else {
-      if (noResults) noResults.classList.add('d-none');
-      
-      // Add filtered partners to container
-      filteredPartners.forEach(partner => {
-        const partnerCard = createPartnerCard(partner);
-        container.appendChild(partnerCard);
-      });
-      
-      // Add event listeners to connect buttons
-      setupConnectButtons();
-    }
+    // Display current page
+    displayCurrentPage();
+    
+    // Update pagination controls
+    updatePaginationControls(allFilteredPartners.length);
   }
   
   // Create a partner card element
@@ -323,3 +365,154 @@ addMatchingToDashboard();
   // Make speakText globally available for HTML onclick events
   window.speakText = speakText;
 
+// ============ PAGINATION FUNCTIONS ============
+
+// Pagination state
+let currentPage = 1;
+const itemsPerPage = 6;
+let allFilteredPartners = []; // Store all filtered results
+
+// Calculate pagination info
+function getPaginationInfo(totalItems) {
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  
+  return {
+    totalPages,
+    startIndex,
+    endIndex,
+    hasNext: currentPage < totalPages,
+    hasPrev: currentPage > 1
+  };
+}
+
+// Get items for current page
+function getCurrentPageItems(items) {
+  const { startIndex, endIndex } = getPaginationInfo(items.length);
+  return items.slice(startIndex, endIndex);
+}
+
+// Update pagination controls
+function updatePaginationControls(totalItems) {
+  const paginationContainer = document.querySelector('.pagination');
+  if (!paginationContainer) return;
+  
+  const { totalPages, hasNext, hasPrev } = getPaginationInfo(totalItems);
+  
+  // Clear existing pagination
+  paginationContainer.innerHTML = '';
+  
+  // Previous button
+  const prevItem = document.createElement('li');
+  prevItem.className = `page-item ${hasPrev ? '' : 'disabled'}`;
+  prevItem.innerHTML = `
+    <a class="page-link" href="#" ${!hasPrev ? 'tabindex="-1" aria-disabled="true"' : ''}>
+      Previous
+    </a>
+  `;
+  if (hasPrev) {
+    prevItem.addEventListener('click', (e) => {
+      e.preventDefault();
+      changePage(currentPage - 1);
+    });
+  }
+  paginationContainer.appendChild(prevItem);
+  
+  // Page numbers
+  for (let i = 1; i <= totalPages; i++) {
+    const pageItem = document.createElement('li');
+    pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
+    pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+    
+    pageItem.addEventListener('click', (e) => {
+      e.preventDefault();
+      changePage(i);
+    });
+    
+    paginationContainer.appendChild(pageItem);
+  }
+  
+  // Next button
+  const nextItem = document.createElement('li');
+  nextItem.className = `page-item ${hasNext ? '' : 'disabled'}`;
+  nextItem.innerHTML = `
+    <a class="page-link" href="#" ${!hasNext ? 'tabindex="-1" aria-disabled="true"' : ''}>
+      Next
+    </a>
+  `;
+  if (hasNext) {
+    nextItem.addEventListener('click', (e) => {
+      e.preventDefault();
+      changePage(currentPage + 1);
+    });
+  }
+  paginationContainer.appendChild(nextItem);
+}
+
+// Change to specific page
+function changePage(newPage) {
+  currentPage = newPage;
+  displayCurrentPage();
+  updatePaginationControls(allFilteredPartners.length);
+  
+  // Scroll to top of results
+  const container = document.getElementById('partners-container');
+  if (container) {
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Display partners for current page
+function displayCurrentPage() {
+  const container = document.getElementById('partners-container');
+  const noResults = document.getElementById('no-results');
+  if (!container) return;
+  
+  // Clear container
+  container.innerHTML = '';
+  
+  // Get items for current page
+  const currentPageItems = getCurrentPageItems(allFilteredPartners);
+  
+  // Show/hide no results message
+  if (allFilteredPartners.length === 0) {
+    if (noResults) noResults.classList.remove('d-none');
+    return;
+  } else {
+    if (noResults) noResults.classList.add('d-none');
+  }
+  
+  // Add partners to container
+  currentPageItems.forEach(partner => {
+    const partnerCard = createPartnerCard(partner);
+    container.appendChild(partnerCard);
+  });
+  
+  // Set up connect buttons
+  setupConnectButtons();
+
+    // Update results info
+    updateResultsInfo();
+}
+
+// Update results information
+function updateResultsInfo() {
+    const resultsInfo = document.getElementById('results-info');
+    if (!resultsInfo) return;
+    
+    const totalItems = allFilteredPartners.length;
+    if (totalItems === 0) {
+      resultsInfo.innerHTML = '';
+      return;
+    }
+    
+    const { startIndex, endIndex } = getPaginationInfo(totalItems);
+    const actualEndIndex = Math.min(endIndex, totalItems);
+    
+    resultsInfo.innerHTML = `
+      <small class="text-muted">
+        Showing ${startIndex + 1}-${actualEndIndex} of ${totalItems} partners
+      </small>
+    `;
+  }
