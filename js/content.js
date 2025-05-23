@@ -1,4 +1,4 @@
-// Data and content loading functions
+// Data and content loading functions - Simplified and consolidated
 
 // Language partner data
 const languagePartners = [
@@ -92,7 +92,14 @@ const languagePartners = [
     },
   ];
   
-  // ============ PARTNER LOADING FUNCTIONS ============
+// ============ PAGINATION STATE ============
+const paginationState = {
+  currentPage: 1,
+  itemsPerPage: 6,
+  filteredPartners: []
+};
+
+// ============ PARTNER LOADING FUNCTIONS ============
   
 // Enhanced loading with realistic delay and states
 function loadPartners() {
@@ -109,51 +116,44 @@ function loadPartners() {
     
     // Set up search functionality
     setupPartnerSearch();
-  }
+}
   
-  // Set up search functionality for partner filtering
-  function setupPartnerSearch() {
+// Set up search functionality for partner filtering
+function setupPartnerSearch() {
     const searchInput = document.getElementById('partner-search');
     const searchButton = document.getElementById('search-button');
     
-    if (searchInput && searchButton) {
-      // Search on button click
-      searchButton.addEventListener('click', () => {
-        filterPartners(searchInput.value.trim());
-      });
-      
-      // Search on Enter key
-      searchInput.addEventListener('keyup', (e) => {
-        if (e.key === 'Enter') {
-          filterPartners(searchInput.value.trim());
-        }
-      });
-    }
-  }
+    if (!searchInput || !searchButton) return;
+    
+    // Handle search action
+    const performSearch = () => filterPartners(searchInput.value.trim());
+    
+    // Search on button click or Enter key
+    searchButton.addEventListener('click', performSearch);
+    searchInput.addEventListener('keyup', (e) => {
+        if (e.key === 'Enter') performSearch();
+    });
+}
   
 // Filter partners based on search term with pagination
 function filterPartners(searchTerm) {
     // Reset to first page when filtering
-    currentPage = 1;
+    paginationState.currentPage = 1;
     
     // Filter partners based on search term
-    allFilteredPartners = searchTerm ? 
+    paginationState.filteredPartners = searchTerm ? 
       languagePartners.filter(partner => 
-        partner.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        partner.teaches.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        partner.learns.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        partner.bio.toLowerCase().includes(searchTerm.toLowerCase())
+        Object.values(partner).some(value => 
+          value.toString().toLowerCase().includes(searchTerm.toLowerCase())
+        )
       ) : languagePartners;
   
     // Display current page
     displayCurrentPage();
-    
-    // Update pagination controls
-    updatePaginationControls(allFilteredPartners.length);
-  }
+}
   
-  // Create a partner card element
-  function createPartnerCard(partner) {
+// Create a partner card element
+function createPartnerCard(partner) {
     const partnerCard = document.createElement('div');
     partnerCard.className = 'col-md-4';
     partnerCard.setAttribute('data-aos', 'fade-up');
@@ -165,62 +165,67 @@ function filterPartners(searchTerm) {
         <p><strong>Wants to learn:</strong> ${partner.learns}</p>
         <p class="small">${partner.bio}</p>
         <button class="btn btn-outline-primary btn-sm connect-btn" 
-                data-id="${partner.id}">Connect</button>
+                data-id="${partner.id}"
+                data-name="${partner.name}"
+                data-avatar="${partner.avatar}"
+                data-teaches="${partner.teaches}">Connect</button>
       </div>
     `;
     
     return partnerCard;
-  }
+}
   
-  // Set up event listeners for connect buttons
-  function setupConnectButtons() {
+// Set up event listeners for connect buttons
+function setupConnectButtons() {
     document.querySelectorAll('.connect-btn').forEach(button => {
       button.addEventListener('click', function() {
         const partnerId = this.getAttribute('data-id');
-        saveRecentlyViewed(partnerId);
-        alert(`Connection requested with partner #${partnerId}`);
+        const partnerData = {
+          id: parseInt(partnerId),
+          name: this.getAttribute('data-name'),
+          avatar: this.getAttribute('data-avatar'),
+          teaches: this.getAttribute('data-teaches')
+        };
+        
+        saveRecentlyViewed(partnerData);
+        
+        // Add animation feedback
+        this.textContent = 'Connected!';
+        this.classList.remove('btn-outline-primary');
+        this.classList.add('btn-success');
+        setTimeout(() => {
+          this.textContent = 'Connect';
+          this.classList.remove('btn-success');
+          this.classList.add('btn-outline-primary');
+        }, 2000);
       });
     });
-  }
+}
   
-  // ============ RECENTLY VIEWED FUNCTIONS ============
+// ============ RECENTLY VIEWED FUNCTIONS ============
   
-  // Keep track of recently viewed partners
-  function saveRecentlyViewed(partnerId) {
-    // Get current partner
-    const partner = languagePartners.find(p => p.id === parseInt(partnerId));
-    if (!partner) return;
-    
+// Keep track of recently viewed partners - simplified
+function saveRecentlyViewed(partner) {
     // Get existing recently viewed partners
     let recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
     
-    // Remove partner if already in list
-    recentlyViewed = recentlyViewed.filter(p => p.id !== partner.id);
-    
-    // Add to front of list
-    recentlyViewed.unshift({
-      id: partner.id,
-      name: partner.name,
-      avatar: partner.avatar,
-      teaches: partner.teaches
-    });
-    
-    // Keep only last 5
-    recentlyViewed = recentlyViewed.slice(0, 5);
+    // Remove partner if already in list, add to front, keep only last 5
+    recentlyViewed = [partner, ...recentlyViewed.filter(p => p.id !== partner.id)].slice(0, 5);
     
     // Save back to localStorage
     localStorage.setItem('recentlyViewed', JSON.stringify(recentlyViewed));
-  }
+}
   
-  // ============ DASHBOARD FUNCTIONS ============
+// ============ DASHBOARD FUNCTIONS ============
   
-  // Load user dashboard with profile and recently viewed partners
-  function loadDashboard() {
+// Load user dashboard with profile and recently viewed partners
+function loadDashboard() {
     const userProfile = document.getElementById('user-profile');
     const userGreeting = document.getElementById('user-greeting');
-    if (!userProfile || !userGreeting) return;
-  
     const currentUser = localStorage.getItem('currentUser');
+    
+    if (!userProfile || !userGreeting) return;
+    
     if (!currentUser) {
       window.location.href = 'login.html';
       return;
@@ -238,54 +243,67 @@ function filterPartners(searchTerm) {
     // Update user greeting
     userGreeting.textContent = `👋 Welcome back, ${userData.avatar}`;
   
-    // Create user profile section
+    // Create user profile section with improved layout
     userProfile.innerHTML = `
       <div class="text-center mb-4">
         <div style="font-size: 4rem;">${userData.avatar}</div>
       </div>
-      <p><strong>Email:</strong> ${currentUser}</p>
-      <p><strong>I teach:</strong> ${userData.teach}</p>
-      <p><strong>I'm learning:</strong> ${userData.learn}</p>
-      <p><strong>Bio:</strong> ${userData.bio}</p>
-      <button id="logout-btn" class="btn btn-outline-danger mt-3">Log Out</button>
+      <div class="row g-3">
+        <div class="col-12"><strong>Email:</strong> ${currentUser}</div>
+        <div class="col-sm-6"><strong>I teach:</strong> ${userData.teach}</div>
+        <div class="col-sm-6"><strong>I'm learning:</strong> ${userData.learn}</div>
+        <div class="col-12"><strong>Bio:</strong> ${userData.bio}</div>
+      </div>
+      <div class="mt-3 d-flex gap-2 flex-wrap">
+        <button id="find-matches-btn" class="btn btn-success">Find My Best Matches</button>
+        <button id="logout-btn" class="btn btn-outline-danger">Log Out</button>
+      </div>
     `;
   
-    // Set up logout button
-    document.getElementById('logout-btn').addEventListener('click', function() {
+    // Set up buttons
+    document.getElementById('logout-btn')?.addEventListener('click', function() {
       localStorage.removeItem('currentUser');
       alert('Logged out successfully!');
       window.location.href = 'login.html';
+    });
+    
+    document.getElementById('find-matches-btn')?.addEventListener('click', function() {
+      const matches = findBestMatches(userData.teach, userData.learn);
+      if (matches.length > 0) {
+        const matchList = matches.map(m => `${m.avatar} ${m.name}`).join(', ');
+        alert(`Your best matches: ${matchList}`);
+      } else {
+        alert('No perfect matches found. Try browsing all partners!');
+      }
     });
   
     // Create progress chart if container exists
     if (document.getElementById('progressChart')) {
       createProgressChart();
     }
-  }
+}
   
-  // Load recently viewed partners into dashboard
-  function loadRecentlyViewed() {
+// Load recently viewed partners into dashboard
+function loadRecentlyViewed() {
     const recentlyViewedContainer = document.getElementById('recently-viewed');
     if (!recentlyViewedContainer) return;
   
     const recentlyViewed = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
     
     if (recentlyViewed.length === 0) {
-      recentlyViewedContainer.innerHTML = '<p>You haven\'t viewed any partners yet.</p>';
+      recentlyViewedContainer.innerHTML = '<p class="text-muted">You haven\'t viewed any partners yet.</p>';
     } else {
-      let html = '<ul class="list-unstyled">';
-      recentlyViewed.forEach(partner => {
-        html += `<li class="mb-2">• ${partner.avatar} ${partner.name} (${partner.teaches})</li>`;
-      });
-      html += '</ul>';
-      recentlyViewedContainer.innerHTML = html;
+      const html = recentlyViewed.map(partner => 
+        `<li class="mb-2">• ${partner.avatar} ${partner.name} (${partner.teaches})</li>`
+      ).join('');
+      recentlyViewedContainer.innerHTML = `<ul class="list-unstyled">${html}</ul>`;
     }
-  }
+}
   
-  // ============ CHART FUNCTIONS ============
+// ============ CHART FUNCTIONS ============
   
-  // Create progress chart for dashboard
-  function createProgressChart() {
+// Create progress chart for dashboard
+function createProgressChart() {
     const ctx = document.getElementById('progressChart');
     if (!ctx) return;
     
@@ -295,91 +313,73 @@ function filterPartners(searchTerm) {
         labels: ['Completed', 'In Progress', 'To Do'],
         datasets: [{
           data: [65, 25, 10],
-          backgroundColor: ['#20bf6b', '#f7b731', '#eb3b5a']
+          backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+          borderWidth: 0
         }]
       },
       options: {
         responsive: true,
         plugins: { 
           legend: { 
-            position: 'bottom' 
+            position: 'bottom',
+            labels: {
+              padding: 20,
+              font: { size: 14 }
+            }
           } 
         }
       }
     });
-  }
+}
   
-  // ============ MATCHING ALGORITHM ============
-  // Smart partner matching algorithm
+// ============ MATCHING ALGORITHM ============
+
+// Smart partner matching algorithm
 function findBestMatches(userTeaches, userLearns) {
-  return languagePartners
-    .filter(partner => 
-      partner.teaches === userLearns && partner.learns === userTeaches
-    )
-    .concat(
-      languagePartners.filter(partner => 
-        partner.teaches === userLearns || partner.learns === userTeaches
-      )
-    )
-    .slice(0, 3); // Top 3 matches
+  // Perfect matches (they learn what you teach AND teach what you learn)
+  const perfectMatches = languagePartners.filter(partner => 
+    partner.teaches === userLearns && partner.learns === userTeaches
+  );
+  
+  // Good matches (either teaches what you want OR learns what you teach)
+  const goodMatches = languagePartners.filter(partner => 
+    (partner.teaches === userLearns || partner.learns === userTeaches) &&
+    !perfectMatches.includes(partner)
+  );
+  
+  // Return perfect matches first, then good matches, limited to 3
+  return [...perfectMatches, ...goodMatches].slice(0, 3);
 }
-
-// Add match button to dashboard
-function addMatchingToDashboard() {
-  const currentUser = localStorage.getItem('currentUser');
-  if (!currentUser) return;
   
-  const userData = JSON.parse(localStorage.getItem(currentUser));
-  if (!userData) return;
+// ============ SPEECH FUNCTIONS ============
   
-  const userProfile = document.getElementById('user-profile');
-  if (userProfile) {
-    const matchButton = document.createElement('button');
-    matchButton.className = 'btn btn-success mt-2';
-    matchButton.textContent = 'Find My Best Matches';
-    matchButton.onclick = () => {
-      const matches = findBestMatches(userData.teach, userData.learn);
-      const matchNames = matches.map(m => `${m.avatar} ${m.name}`).join(', ');
-      alert(`Your best matches: ${matchNames || 'No perfect matches found'}`);
-    };
-    userProfile.appendChild(matchButton);
-  }
-}
-
-// Add to loadDashboard
-addMatchingToDashboard();
-
-  
-  // ============ SPEECH FUNCTIONS ============
-  
-  // Simple text-to-speech function for pronunciation practice
-  function speakText(text) {
+// Simple text-to-speech function for pronunciation practice
+function speakText(text) {
     if ('speechSynthesis' in window) {
       const utterance = new SpeechSynthesisUtterance(text);
+      utterance.rate = 0.9; // Slightly slower for language learning
       speechSynthesis.speak(utterance);
     } else {
-      alert('Speech synthesis not supported');
+      alert('Speech synthesis not supported in your browser');
     }
-  }
+}
   
-  // Make speakText globally available for HTML onclick events
-  window.speakText = speakText;
+// Make speakText globally available for HTML onclick events
+window.speakText = speakText;
 
 // ============ PAGINATION FUNCTIONS ============
 
-// Pagination state
-let currentPage = 1;
-const itemsPerPage = 6;
-let allFilteredPartners = []; // Store all filtered results
-
 // Calculate pagination info
-function getPaginationInfo(totalItems) {
+function getPaginationInfo() {
+  const { currentPage, itemsPerPage, filteredPartners } = paginationState;
+  const totalItems = filteredPartners.length;
   const totalPages = Math.ceil(totalItems / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
+  const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
   
   return {
     totalPages,
+    totalItems,
     startIndex,
     endIndex,
     hasNext: currentPage < totalPages,
@@ -387,80 +387,58 @@ function getPaginationInfo(totalItems) {
   };
 }
 
-// Get items for current page
-function getCurrentPageItems(items) {
-  const { startIndex, endIndex } = getPaginationInfo(items.length);
-  return items.slice(startIndex, endIndex);
-}
-
-// Update pagination controls
-function updatePaginationControls(totalItems) {
+// Update pagination controls - simplified
+function updatePaginationControls() {
   const paginationContainer = document.querySelector('.pagination');
   if (!paginationContainer) return;
   
-  const { totalPages, hasNext, hasPrev } = getPaginationInfo(totalItems);
+  const { totalPages, hasNext, hasPrev } = getPaginationInfo();
+  const { currentPage } = paginationState;
   
-  // Clear existing pagination
-  paginationContainer.innerHTML = '';
-  
-  // Previous button
-  const prevItem = document.createElement('li');
-  prevItem.className = `page-item ${hasPrev ? '' : 'disabled'}`;
-  prevItem.innerHTML = `
-    <a class="page-link" href="#" ${!hasPrev ? 'tabindex="-1" aria-disabled="true"' : ''}>
-      Previous
-    </a>
+  // Build pagination HTML
+  let paginationHTML = `
+    <li class="page-item ${hasPrev ? '' : 'disabled'}">
+      <a class="page-link" href="#" onclick="changePage(${currentPage - 1}); return false;">
+        Previous
+      </a>
+    </li>
   `;
-  if (hasPrev) {
-    prevItem.addEventListener('click', (e) => {
-      e.preventDefault();
-      changePage(currentPage - 1);
-    });
-  }
-  paginationContainer.appendChild(prevItem);
   
-  // Page numbers
+  // Add page numbers
   for (let i = 1; i <= totalPages; i++) {
-    const pageItem = document.createElement('li');
-    pageItem.className = `page-item ${i === currentPage ? 'active' : ''}`;
-    pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-    
-    pageItem.addEventListener('click', (e) => {
-      e.preventDefault();
-      changePage(i);
-    });
-    
-    paginationContainer.appendChild(pageItem);
+    paginationHTML += `
+      <li class="page-item ${i === currentPage ? 'active' : ''}">
+        <a class="page-link" href="#" onclick="changePage(${i}); return false;">${i}</a>
+      </li>
+    `;
   }
   
-  // Next button
-  const nextItem = document.createElement('li');
-  nextItem.className = `page-item ${hasNext ? '' : 'disabled'}`;
-  nextItem.innerHTML = `
-    <a class="page-link" href="#" ${!hasNext ? 'tabindex="-1" aria-disabled="true"' : ''}>
-      Next
-    </a>
+  paginationHTML += `
+    <li class="page-item ${hasNext ? '' : 'disabled'}">
+      <a class="page-link" href="#" onclick="changePage(${currentPage + 1}); return false;">
+        Next
+      </a>
+    </li>
   `;
-  if (hasNext) {
-    nextItem.addEventListener('click', (e) => {
-      e.preventDefault();
-      changePage(currentPage + 1);
-    });
-  }
-  paginationContainer.appendChild(nextItem);
+  
+  paginationContainer.innerHTML = paginationHTML;
 }
 
 // Change to specific page
 function changePage(newPage) {
-  currentPage = newPage;
-  displayCurrentPage();
-  updatePaginationControls(allFilteredPartners.length);
+  const { totalPages } = getPaginationInfo();
   
-  // Scroll to top of results
-  const container = document.getElementById('partners-container');
-  if (container) {
-    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  // Validate page number
+  if (newPage < 1 || newPage > totalPages) return;
+  
+  paginationState.currentPage = newPage;
+  displayCurrentPage();
+  
+  // Smooth scroll to top of results
+  document.getElementById('partners-container')?.scrollIntoView({ 
+    behavior: 'smooth', 
+    block: 'start' 
+  });
 }
 
 // Display partners for current page
@@ -469,31 +447,33 @@ function displayCurrentPage() {
   const noResults = document.getElementById('no-results');
   if (!container) return;
   
+  const { startIndex, endIndex, totalItems } = getPaginationInfo();
+  const { filteredPartners } = paginationState;
+  
   // Clear container
   container.innerHTML = '';
   
-  // Get items for current page
-  const currentPageItems = getCurrentPageItems(allFilteredPartners);
-  
   // Show/hide no results message
-  if (allFilteredPartners.length === 0) {
-    if (noResults) noResults.classList.remove('d-none');
+  if (totalItems === 0) {
+    noResults?.classList.remove('d-none');
+    updateResultsInfo();
     return;
   } else {
-    if (noResults) noResults.classList.add('d-none');
+    noResults?.classList.add('d-none');
   }
   
   // Add partners to container
-  currentPageItems.forEach(partner => {
+  filteredPartners.slice(startIndex, endIndex).forEach((partner, index) => {
     const partnerCard = createPartnerCard(partner);
+    // Add staggered animation delay
+    partnerCard.setAttribute('data-aos-delay', index * 50);
     container.appendChild(partnerCard);
   });
   
-  // Set up connect buttons
+  // Update UI elements
   setupConnectButtons();
-
-    // Update results info
-    updateResultsInfo();
+  updatePaginationControls();
+  updateResultsInfo();
 }
 
 // Update results information
@@ -501,18 +481,19 @@ function updateResultsInfo() {
     const resultsInfo = document.getElementById('results-info');
     if (!resultsInfo) return;
     
-    const totalItems = allFilteredPartners.length;
+    const { startIndex, endIndex, totalItems } = getPaginationInfo();
+    
     if (totalItems === 0) {
       resultsInfo.innerHTML = '';
       return;
     }
     
-    const { startIndex, endIndex } = getPaginationInfo(totalItems);
-    const actualEndIndex = Math.min(endIndex, totalItems);
-    
     resultsInfo.innerHTML = `
       <small class="text-muted">
-        Showing ${startIndex + 1}-${actualEndIndex} of ${totalItems} partners
+        Showing ${startIndex + 1}-${endIndex} of ${totalItems} partners
       </small>
     `;
-  }
+}
+
+// Make changePage globally available for pagination onclick
+window.changePage = changePage;

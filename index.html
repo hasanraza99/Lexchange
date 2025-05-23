@@ -1,35 +1,24 @@
-<!-- Tells the browser this is a HTML5 document -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Set character encoding to the default HTML-5 Standard (which is UTF-8)-->
     <meta charset="UTF-8">
-
-    <!-- Makes the website responsive on mobile and tablet screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Lexchange - Connect with language learners worldwide for authentic conversation practice. Free, safe, and effective language exchange platform.">
 
-    <title>Lexchange - Home</title>
+    <title>Lexchange - Language Exchange Without the Weirdos</title>
 
-    <!-- Link to custom stylesheet -->
-    <link rel="stylesheet" href="css/style.css" />
-
-    <!-- Bootstrap 5 CSS (latest version) from jsdelivr -->
+    <!-- CSS Dependencies -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
-    <!-- AOS Scroll Animations -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
-    <!-- AOS Scroll Animations JS -->
+    <!-- JavaScript Dependencies (deferred for better performance) -->
     <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
-    <!-- Add Chart.js CDN -->
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Bootstrap 5 JS  -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JavaScript scripts -->
+    <!-- Custom JavaScript (consolidated load order) -->
     <script defer src="js/components.js"></script>
     <script defer src="js/theme.js"></script>
     <script defer src="js/auth.js"></script>
@@ -38,77 +27,122 @@
 </head>
 
 <body>
-
     <!-- Navbar will be injected here -->
-    <div id="navbar-container"></div>
+    <header id="navbar-container"></header>
 
     <!-- Main Content -->
-
-    <!-- my5 means m:margin y:vertical direction (top and bottom) 5:size, so my-2 adds margin to top and bottom of scale 5-->
     <main class="container-fluid px-0">
-    
-        <!-- Hero Section: Big headline, subheading, and call-to-action button -->
+        <!-- Enhanced Hero Section with modern gradient -->
         <section class="text-center py-5 hero-section">
             <div class="container" data-aos="fade-up">
                 <h1 class="display-4 fw-bold mb-3">Language exchange, without the weirdos.</h1>
-                <p class="lead mb-4">Connect with real learners. Trade your time. Build confidence — together.</p>
-                <a href="profile.html" class="btn btn-primary btn-lg">Get Started</a>
+                <p class="lead mb-4 px-md-5">Connect with real learners. Trade your time. Build confidence — together.
+                </p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="profile.html" class="btn btn-light btn-lg px-4">Get Started Free</a>
+                    <a href="browse.html" class="btn btn-outline-light btn-lg px-4">Browse Partners</a>
+                </div>
             </div>
         </section>
-    
-        <!-- Features Section: 3-column layout using Bootstrap Grid -->
-        <section class="py-5 bg-white">
-            <div class="container text-center">
-                <h2 class="fw-bold mb-5" data-aos="fade-up">Why Lexchange?</h2>
+
+        <!-- Features Section with improved cards -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <h2 class="fw-bold text-center mb-5" data-aos="fade-up">Why Choose Lexchange?</h2>
                 <div class="row g-4">
+                    <!-- Safe & Respectful Card -->
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                        <div class="p-4 border rounded h-100 shadow-sm">
-                            <h3 class="mb-3">🔒 Safe & Respectful</h3>
-                            <p>Avatar-based profiles, reporting tools, and moderation to keep things clean and focused.</p>
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body p-4 text-center">
+                                <div class="mb-3" style="font-size: 3rem;">🔒</div>
+                                <h3 class="h4 mb-3">Safe & Respectful</h3>
+                                <p class="text-muted">Avatar-based profiles, reporting tools, and moderation to keep
+                                    conversations focused on learning.</p>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Global Connections Card -->
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="p-4 border rounded h-100 shadow-sm">
-                            <h3 class="mb-3">🌍 Global Connections</h3>
-                            <p>Meet language partners across the world. Learn what you love. Teach what you know.</p>
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body p-4 text-center">
+                                <div class="mb-3" style="font-size: 3rem;">🌍</div>
+                                <h3 class="h4 mb-3">Global Connections</h3>
+                                <p class="text-muted">Meet language partners worldwide. Learn what you love. Teach what
+                                    you know.</p>
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Mutual Learning Card -->
                     <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                        <div class="p-4 border rounded h-100 shadow-sm">
-                            <h3 class="mb-3">🔁 Mutual Learning</h3>
-                            <p>Every match is a trade. Give and take. Balanced, time-based practice that works for both sides.
-                            </p>
+                        <div class="card h-100 border-0 shadow-sm">
+                            <div class="card-body p-4 text-center">
+                                <div class="mb-3" style="font-size: 3rem;">🔁</div>
+                                <h3 class="h4 mb-3">Mutual Learning</h3>
+                                <p class="text-muted">Every match is a fair trade. Balanced, time-based practice that
+                                    works for both partners.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-    
-        <!-- Optional testimonial/quote section -->
-        <section class="bg-light py-5">
-            <div class="container text-center" data-aos="fade-up">
-                <blockquote class="blockquote">
-                    <p class="fst-italic mb-0">"Lexchange helped me take my basic French to a conversational level in under a
-                        year. It just works!"</p>
-                    <footer class="blockquote-footer mt-2">Early Beta Tester</footer>
-                </blockquote>
+
+        <!-- Statistics Section (new) -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row text-center g-4" data-aos="fade-up">
+                    <div class="col-6 col-md-3">
+                        <h3 class="display-5 fw-bold text-primary">15+</h3>
+                        <p class="text-muted">Languages Supported</p>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <h3 class="display-5 fw-bold text-primary">100%</h3>
+                        <p class="text-muted">Free Forever</p>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <h3 class="display-5 fw-bold text-primary">Safe</h3>
+                        <p class="text-muted">Moderated Platform</p>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <h3 class="display-5 fw-bold text-primary">24/7</h3>
+                        <p class="text-muted">Practice Anytime</p>
+                    </div>
+                </div>
             </div>
         </section>
-    
-        <!-- Final call-to-action at the bottom -->
+
+        <!-- Testimonial section with better styling -->
+        <section class="py-5 bg-light">
+            <div class="container" data-aos="fade-up">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 text-center">
+                        <blockquote class="blockquote">
+                            <p class="mb-4">"Lexchange helped me take my basic French to a conversational level in under
+                                a year. The community is supportive and the platform just works!"</p>
+                            <footer class="blockquote-footer">Sarah Chen, <cite>Beta Tester</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA with improved design -->
         <section class="text-center py-5">
             <div class="container" data-aos="fade-up">
-                <h2 class="mb-4">Ready to get started?</h2>
-                <a href="profile.html" class="btn btn-outline-primary btn-lg">Start Your Profile</a>
+                <h2 class="mb-4">Ready to Start Your Language Journey?</h2>
+                <p class="lead mb-4">Join thousands of learners practicing languages every day.</p>
+                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                    <a href="profile.html" class="btn btn-primary btn-lg px-4">Create Your Profile</a>
+                    <a href="about.html" class="btn btn-outline-primary btn-lg px-4">Learn More</a>
+                </div>
             </div>
         </section>
-    
     </main>
 
-
     <!-- Footer will be injected here -->
-    <div id="footer-container"></div>
-
+    <footer id="footer-container"></footer>
 </body>
 
 </html>

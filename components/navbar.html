@@ -1,73 +1,81 @@
-<!-- 
-    Enhanced mobile-friendly navigation
-    This navbar uses Bootstrap's responsive classes to provide:
-    1. A clean desktop experience with horizontal links
-    2. A mobile-friendly experience with a collapsible menu
-    3. Visual cues for the current page
--->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<!-- Enhanced mobile-friendly navigation with improved styling -->
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
     <div class="container">
-        <!-- 
-            Brand/logo with appropriate sizing
-            The brand should be visible and properly sized on all devices
-        -->
+        <!-- Brand/logo with gradient effect -->
         <a class="navbar-brand d-flex align-items-center" href="index.html">
-            <!-- You could add an actual logo image here -->
-            <span class="fs-4 fw-bold">Lexchange</span>
+            <span class="fw-bold">Lexchange</span>
         </a>
 
-        <!-- 
-            Mobile hamburger menu button
-            This button only appears on small screens (controlled by navbar-expand-lg)
-            The aria attributes improve accessibility for screen readers
-        -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavBar"
+        <!-- Mobile hamburger button with improved accessibility -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavBar"
             aria-controls="mainNavBar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- 
-            Navigation links container
-            This div will collapse on small screens and expand on larger ones
-        -->
+        <!-- Navigation links container -->
         <div class="collapse navbar-collapse" id="mainNavBar">
-            <!-- 
-                ms-auto pushes the nav links to the right side
-                navbar-nav provides styling for the navigation links
-            -->
-            <ul class="navbar-nav ms-auto">
-                <!-- 
-                    Each nav item can be "active" to show the current page
-                    JavaScript could be used to set this dynamically based on the current page
-                -->
-                <li class="nav-item">
+            <!-- Main navigation links -->
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <!-- Login/Profile toggle based on auth state -->
+                <li class="nav-item" id="auth-nav-item">
                     <a class="nav-link" href="login.html">Login</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="browse.html">Browse</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile.html">Profile</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="practice.html">Practice</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="about.html">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="report.html">Report</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="dashboard.html">Dashboard</a>
+
+                <!-- Dropdown for additional pages -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="moreDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        More
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="moreDropdown">
+                        <li><a class="dropdown-item" href="dashboard.html">Dashboard</a></li>
+                        <li><a class="dropdown-item" href="profile.html">Edit Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="report.html">Report Issue</a></li>
+                    </ul>
                 </li>
 
+                <!-- Theme toggle with improved styling -->
                 <li class="nav-item ms-lg-3">
-                    <button id="theme-toggle" class="btn btn-sm btn-outline-primary">
-                        <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
+                    <button id="theme-toggle" class="btn btn-sm" aria-label="Toggle theme">
+                        <span id="theme-icon">🌙</span>
+                        <span id="theme-text" class="d-none d-sm-inline">Dark</span>
                     </button>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script>
+    // Update auth nav item based on login status
+    document.addEventListener('DOMContentLoaded', function () {
+        const authNavItem = document.getElementById('auth-nav-item');
+        const currentUser = localStorage.getItem('currentUser');
+
+        if (currentUser && authNavItem) {
+            // Get user data for avatar
+            const userData = JSON.parse(localStorage.getItem(currentUser) || '{}');
+            authNavItem.innerHTML = `
+            <a class="nav-link d-flex align-items-center gap-2" href="dashboard.html">
+                <span>${userData.avatar || '👤'}</span> 
+                <span class="d-none d-sm-inline">Profile</span>
+            </a>
+        `;
+        }
+    });
+</script>
