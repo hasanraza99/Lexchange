@@ -38,10 +38,18 @@ const languagePartners = [
   
   // ============ PARTNER LOADING FUNCTIONS ============
   
-  // Load language partners into the browse page
-  function loadPartners() {
-    // Initial load of all partners
-    filterPartners('');
+// Enhanced loading with realistic delay and states
+function loadPartners() {
+    const container = document.getElementById('partners-container');
+    if (!container) return;
+    
+    // Show loading spinner
+    container.innerHTML = '<div class="col-12 text-center"><div class="loading-indicator"></div> Loading partners...</div>';
+    
+    // Simulate realistic loading delay
+    setTimeout(() => {
+      filterPartners('');
+    }, 800);
     
     // Set up search functionality
     setupPartnerSearch();
@@ -259,6 +267,47 @@ const languagePartners = [
     });
   }
   
+  // ============ MATCHING ALGORITHM ============
+  // Smart partner matching algorithm
+function findBestMatches(userTeaches, userLearns) {
+  return languagePartners
+    .filter(partner => 
+      partner.teaches === userLearns && partner.learns === userTeaches
+    )
+    .concat(
+      languagePartners.filter(partner => 
+        partner.teaches === userLearns || partner.learns === userTeaches
+      )
+    )
+    .slice(0, 3); // Top 3 matches
+}
+
+// Add match button to dashboard
+function addMatchingToDashboard() {
+  const currentUser = localStorage.getItem('currentUser');
+  if (!currentUser) return;
+  
+  const userData = JSON.parse(localStorage.getItem(currentUser));
+  if (!userData) return;
+  
+  const userProfile = document.getElementById('user-profile');
+  if (userProfile) {
+    const matchButton = document.createElement('button');
+    matchButton.className = 'btn btn-success mt-2';
+    matchButton.textContent = 'Find My Best Matches';
+    matchButton.onclick = () => {
+      const matches = findBestMatches(userData.teach, userData.learn);
+      const matchNames = matches.map(m => `${m.avatar} ${m.name}`).join(', ');
+      alert(`Your best matches: ${matchNames || 'No perfect matches found'}`);
+    };
+    userProfile.appendChild(matchButton);
+  }
+}
+
+// Add to loadDashboard
+addMatchingToDashboard();
+
+  
   // ============ SPEECH FUNCTIONS ============
   
   // Simple text-to-speech function for pronunciation practice
@@ -273,3 +322,4 @@ const languagePartners = [
   
   // Make speakText globally available for HTML onclick events
   window.speakText = speakText;
+
