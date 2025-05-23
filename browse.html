@@ -9,18 +9,25 @@
     <!-- Makes the website responsive on mobile and tablet screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Lexchange - Home</title>
+    <title>Lexchange - Browse</title>
+
+    <!-- Link to custom stylesheet -->
+    <link rel="stylesheet" href="css/style.css" />
 
     <!-- Bootstrap 5 CSS (latest version) from jsdelivr -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
     <!-- AOS Scroll Animations -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
     <!-- AOS Scroll Animations JS -->
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Add Chart.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- Bootstrap 5 JS  -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Custom JavaScript scripts -->
     <script defer src="js/components.js"></script>
@@ -28,10 +35,6 @@
     <script defer src="js/auth.js"></script>
     <script defer src="js/content.js"></script>
     <script defer src="js/main.js"></script>
-
-    <!-- Link to custom stylesheet -->
-    <link rel="stylesheet" href="css/style.css" />
-
 </head>
 
 <body>
@@ -50,9 +53,12 @@
         <section class="mb-4">
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search by language or name...">
-                        <button class="btn btn-primary" type="button">Find Partners</button>
+                    <div class="input-group">
+                        <input type="text" id="partner-search" class="form-control" placeholder="Search by language or name...">
+                        <button id="search-button" class="btn btn-primary">Find Partners</button>
+                    </div>
+                    <div class="form-text text-center mt-2">
+                        Try searching for "Spanish", "French", or any language or name
                     </div>
                 </div>
             </div>
@@ -60,11 +66,14 @@
 
         <!-- Match Cards Section -->
         <section class="row g-4" id="partners-container">
-            <!-- Partner cards will be loaded here dynamically -->
-            <div class="col-12 text-center" id="loading-partners">
-                <p>Loading partners...</p>
+            <div class="col-12 text-center" id="loading-message">
+              <p>Loading partners...</p>
             </div>
         </section>
+          
+        <div id="no-results" class="text-center py-4 d-none">
+        <p>No matching partners found. Try a different search term.</p>
+        </div>
 
         <!-- Pagination section -->
         <section class="d-flex justify-content-center mt-4">

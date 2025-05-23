@@ -20,6 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setupLoginForm();
     setupProfileForm();
     
+    // Initialize real-time validation
+    setupRealTimeValidation('profile-form');
+    setupRealTimeValidation('login-form');
+    
     // Load page-specific content
     if (document.getElementById('partners-container')) {
       setTimeout(loadPartners, 800);

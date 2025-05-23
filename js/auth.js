@@ -94,3 +94,52 @@ function isValidEmail(email) {
       window.location.href = "login.html";
     });
   }
+
+  // Add real-time validation to forms
+function setupRealTimeValidation(formId) {
+    const form = document.getElementById(formId);
+    if (!form) return;
+    
+    const inputs = form.querySelectorAll('input, select, textarea');
+    
+    inputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        validateSingleField(this);
+      });
+    });
+  }
+  
+  // Validate a single form field
+  function validateSingleField(field) {
+    // Skip if field has no id
+    if (!field.id) return;
+    
+    // Check if empty
+    if (!field.value.trim()) {
+      field.classList.add('is-invalid');
+      field.classList.remove('is-valid');
+      return false;
+    }
+    
+    // Special validation for email
+    if (field.id === 'email' && !isValidEmail(field.value)) {
+      field.classList.add('is-invalid');
+      field.classList.remove('is-valid');
+      return false;
+    }
+    
+    // Special validation for password confirmation
+    if (field.id === 'password-confirm') {
+      const password = document.getElementById('password');
+      if (password && field.value !== password.value) {
+        field.classList.add('is-invalid');
+        field.classList.remove('is-valid');
+        return false;
+      }
+    }
+    
+    // Field is valid
+    field.classList.remove('is-invalid');
+    field.classList.add('is-valid');
+    return true;
+  }
