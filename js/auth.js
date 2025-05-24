@@ -1,307 +1,159 @@
-// Authentication and user management functions - Enhanced version
+// Authentication and user management
 
-// ============ VALIDATION HELPERS ============
+// Validation helpers
+const isValidEmail = email => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-// Basic email validation
-function isValidEmail(email) {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-}
-
-// Password strength checker
-function checkPasswordStrength(password) {
-    if (password.length < 6) return { valid: false, message: "Password must be at least 6 characters" };
-    if (password.length < 8) return { valid: true, message: "Weak password" };
-    if (/[A-Z]/.test(password) && /[0-9]/.test(password)) return { valid: true, message: "Strong password" };
-    return { valid: true, message: "Medium password" };
-}
-
-// ============ FORM VALIDATION ============
-
-// Validate a single form field with enhanced feedback
-function validateSingleField(field) {
-    // Skip if field has no id
-    if (!field.id) return true;
+function validateField(field) {
+    const value = field.value.trim();
+    let isValid = !!value;
     
-    // Remove previous validation
-    field.classList.remove('is-invalid', 'is-valid');
-    
-    // Get or create feedback element
-    let feedback = field.nextElementSibling;
-    if (!feedback || !feedback.classList.contains('invalid-feedback')) {
-        feedback = document.createElement('div');
-        feedback.className = 'invalid-feedback';
-        field.parentNode.insertBefore(feedback, field.nextSibling);
-    }
-    
-    // Check if empty
-    if (!field.value.trim()) {
-        field.classList.add('is-invalid');
-        feedback.textContent = `Please enter your ${field.id.replace('-', ' ')}`;
-        return false;
-    }
-    
-    // Special validation for email
-    if (field.id === 'email' && !isValidEmail(field.value)) {
-        field.classList.add('is-invalid');
-        feedback.textContent = 'Please enter a valid email address';
-        return false;
-    }
-    
-    // Special validation for password
-    if (field.id === 'password' && field.form.id === 'profile-form') {
-        const strength = checkPasswordStrength(field.value);
-        if (!strength.valid) {
-            field.classList.add('is-invalid');
-            feedback.textContent = strength.message;
-            return false;
-        }
-    }
-    
-    // Special validation for password confirmation
+    if (field.type === 'email') isValid = value && isValidEmail(value);
     if (field.id === 'password-confirm') {
         const password = document.getElementById('password');
-        if (password && field.value !== password.value) {
-            field.classList.add('is-invalid');
-            feedback.textContent = 'Passwords do not match';
-            return false;
-        }
+        isValid = password && field.value === password.value;
     }
     
-    // Field is valid
-    field.classList.add('is-valid');
-    return true;
-}
-
-// Validate entire form
-function validateForm(form, fields) {
-    let isValid = true;
-    
-    fields.forEach(fieldId => {
-        const field = document.getElementById(fieldId);
-        if (field && !validateSingleField(field)) {
-            isValid = false;
-        }
-    });
+    field.classList.toggle('is-invalid', !isValid);
+    field.classList.toggle('is-valid', isValid);
     
     return isValid;
 }
 
-// ============ LOGIN FUNCTIONALITY ============
-
-// Handle login functionality with improved UX
-function setupLoginForm() {
-    const loginForm = document.getElementById("login-form");
-    if (!loginForm) return;
+// Setup forms
+function setupForm(formId, handler) {
+    const form = document.getElementById(formId);
+    if (!form) return;
     
-    // Add loading state management
-    const submitButton = loginForm.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton?.textContent || 'Login';
-    
-    loginForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        
-        // Show loading state
-        if (submitButton) {
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Logging in...';
-        }
-        
-        // Simulate async operation for better UX
-        await new Promise(resolve => setTimeout(resolve, 500));
-        
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        
-        // Validate fields
-        if (!validateForm(loginForm, ['email', 'password'])) {
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
-            }
-            return;
-        }
-        
-        const userData = localStorage.getItem(email);
-        
-        if (userData) {
-            const user = JSON.parse(userData);
-            if (user.password === password) {
-                localStorage.setItem('currentUser', email);
-                
-                // Show success message before redirect
-                showAlert('success', 'Login successful! Redirecting...');
-                
-                setTimeout(() => {
-                    window.location.href = "dashboard.html";
-                }, 1000);
-            } else {
-                showAlert('danger', 'Incorrect password. Please try again.');
-                document.getElementById("password").classList.add('is-invalid');
-            }
-        } else {
-            showAlert('warning', 'No account found with this email. Please sign up first.');
-        }
-        
-        // Reset button state
-        if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = originalButtonText;
-        }
+    // Real-time validation
+    form.querySelectorAll('input, select, textarea').forEach(input => {
+        input.addEventListener('blur', () => validateField(input));
+        input.addEventListener('input', () => input.classList.remove('is-invalid'));
     });
-}
-
-// ============ PROFILE FUNCTIONALITY ============
-
-// Handle profile form submission with enhanced validation
-function setupProfileForm() {
-    const profileForm = document.getElementById("profile-form");
-    if (!profileForm) return;
     
-    // Add loading state management
-    const submitButton = profileForm.querySelector('button[type="submit"]');
-    const originalButtonText = submitButton?.textContent || 'Save Profile';
-    
-    profileForm.addEventListener("submit", async (e) => {
+    // Form submission
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        const requiredFields = ['email', 'password', 'avatar', 'teach', 'learn', 'bio'];
-        if (!validateForm(profileForm, requiredFields)) {
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn?.textContent || 'Submit';
+        
+        // Validate all fields
+        const fields = form.querySelectorAll('[required]');
+        let isValid = true;
+        fields.forEach(field => {
+            if (!validateField(field)) isValid = false;
+        });
+        
+        if (!isValid) {
             showAlert('danger', 'Please fill in all required fields correctly');
             return;
         }
         
-        // Check password confirmation
-        const password = document.getElementById("password").value;
-        const passwordConfirm = document.getElementById("password-confirm").value;
-        
-        if (password !== passwordConfirm) {
-            document.getElementById("password-confirm").classList.add('is-invalid');
-            showAlert('danger', 'Passwords do not match');
-            return;
+        // Show loading
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
         }
         
-        // Show loading state
-        if (submitButton) {
-            submitButton.disabled = true;
-            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Saving...';
-        }
-        
-        // Simulate async save
+        // Process form
         await new Promise(resolve => setTimeout(resolve, 500));
+        const result = await handler(form);
         
-        // Collect form data
-        const email = document.getElementById("email").value;
-        const userData = {
-            avatar: document.getElementById("avatar").value,
-            teach: document.getElementById("teach").value,
-            learn: document.getElementById("learn").value,
-            bio: document.getElementById("bio").value,
-            password: password,
-            createdAt: new Date().toISOString()
-        };
-        
-        // Check if teach and learn are the same
-        if (userData.teach === userData.learn) {
-            showAlert('warning', 'You cannot teach and learn the same language. Please choose different languages.');
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
-            }
-            return;
+        // Reset button
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
         }
         
-        // Save user data
-        localStorage.setItem(email, JSON.stringify(userData));
-        
-        // Show success message
-        showAlert('success', 'Profile created successfully! Redirecting to login...');
-        
-        // Redirect after delay
-        setTimeout(() => {
-            window.location.href = "login.html";
-        }, 1500);
-    });
-}
-
-// ============ REAL-TIME VALIDATION ============
-
-// Add real-time validation to forms
-function setupRealTimeValidation(formId) {
-    const form = document.getElementById(formId);
-    if (!form) return;
-    
-    const inputs = form.querySelectorAll('input, select, textarea');
-    
-    inputs.forEach(input => {
-        // Validate on blur
-        input.addEventListener('blur', function() {
-            validateSingleField(this);
-        });
-        
-        // Clear validation on input
-        input.addEventListener('input', function() {
-            if (this.classList.contains('is-invalid')) {
-                this.classList.remove('is-invalid');
+        if (result) {
+            showAlert(result.type, result.message);
+            if (result.redirect) {
+                setTimeout(() => window.location.href = result.redirect, 1500);
             }
-        });
+        }
     });
 }
 
-// ============ ALERT SYSTEM ============
-
-// Show Bootstrap alert messages
-function showAlert(type, message) {
-    // Remove any existing alerts
-    const existingAlert = document.querySelector('.alert-dismissible');
-    if (existingAlert) {
-        existingAlert.remove();
+// Login handler
+async function handleLogin(form) {
+    const email = form.email.value;
+    const password = form.password.value;
+    const userData = localStorage.getItem(email);
+    
+    if (!userData) {
+        return { type: 'warning', message: 'No account found. Please sign up first.' };
     }
     
-    // Create new alert
+    const user = JSON.parse(userData);
+    if (user.password !== password) {
+        form.password.classList.add('is-invalid');
+        return { type: 'danger', message: 'Incorrect password.' };
+    }
+    
+    localStorage.setItem('currentUser', email);
+    return { type: 'success', message: 'Login successful!', redirect: 'dashboard.html' };
+}
+
+// Profile handler  
+async function handleProfile(form) {
+    const email = form.email.value;
+    const password = form.password.value;
+    const passwordConfirm = form['password-confirm'].value;
+    
+    if (password !== passwordConfirm) {
+        form['password-confirm'].classList.add('is-invalid');
+        return { type: 'danger', message: 'Passwords do not match' };
+    }
+    
+    const userData = {
+        avatar: form.avatar.value,
+        teach: form.teach.value,
+        learn: form.learn.value,
+        bio: form.bio.value,
+        password: password,
+        createdAt: new Date().toISOString()
+    };
+    
+    if (userData.teach === userData.learn) {
+        return { type: 'warning', message: 'You cannot teach and learn the same language.' };
+    }
+    
+    localStorage.setItem(email, JSON.stringify(userData));
+    return { type: 'success', message: 'Profile created!', redirect: 'login.html' };
+}
+
+// Alert system
+function showAlert(type, message) {
+    const existingAlert = document.querySelector('.alert-dismissible');
+    existingAlert?.remove();
+    
     const alert = document.createElement('div');
     alert.className = `alert alert-${type} alert-dismissible fade show position-fixed top-0 start-50 translate-middle-x mt-3`;
-    alert.style.zIndex = '9999';
-    alert.style.minWidth = '300px';
-    
+    alert.style.cssText = 'z-index: 9999; min-width: 300px;';
     alert.innerHTML = `
         ${message}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     `;
     
     document.body.appendChild(alert);
-    
-    // Auto-dismiss after 5 seconds
     setTimeout(() => {
         alert.classList.remove('show');
         setTimeout(() => alert.remove(), 150);
     }, 5000);
 }
 
-// ============ AUTH STATE MANAGEMENT ============
-
-// Check if user is logged in
-function isLoggedIn() {
-    return localStorage.getItem('currentUser') !== null;
+// Initialize forms
+function setupLoginForm() {
+    setupForm('login-form', handleLogin);
 }
 
-// Get current user data
-function getCurrentUserData() {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) return null;
-    
-    const userData = localStorage.getItem(currentUser);
-    return userData ? JSON.parse(userData) : null;
+function setupProfileForm() {
+    setupForm('profile-form', handleProfile);
 }
 
 // Logout function
-function logout() {
+window.logout = function() {
     localStorage.removeItem('currentUser');
     showAlert('success', 'Logged out successfully');
-    setTimeout(() => {
-        window.location.href = 'index.html';
-    }, 1000);
-}
-
-// Make logout function globally available
-window.logout = logout;
+    setTimeout(() => window.location.href = 'index.html', 1000);
+};

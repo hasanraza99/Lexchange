@@ -1,34 +1,30 @@
-/* Core theme variables - Simplified and modernized */
+/* Core theme variables */
 :root {
-    /* Modern color palette with better contrast */
+    /* Colors */
     --primary: #6366f1;
     --primary-dark: #4f46e5;
     --primary-light: #818cf8;
-    --secondary: #10b981;
+    --success: #10b981;
+    --danger: #ef4444;
     --text: #1f2937;
     --text-light: #6b7280;
     --border: #e5e7eb;
-    --success: #10b981;
-    --danger: #ef4444;
-    --warning: #f59e0b;
 
-    /* Light theme (default) - Cleaner backgrounds */
+    /* Light theme */
     --bg: #f9fafb;
     --card-bg: #ffffff;
     --navbar-bg: rgba(255, 255, 255, 0.95);
 
-    /* Enhanced shadows and effects */
+    /* Layout */
     --radius: 0.75rem;
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
     --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
     --transition: all 0.2s ease;
-
-    /* Modern gradient for hero sections */
     --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-/* Dark theme - Enhanced contrast */
+/* Dark theme */
 .dark-theme {
     --bg: #0a0f1b;
     --card-bg: #1a2332;
@@ -37,154 +33,9 @@
     --text-light: #94a3b8;
     --border: #2d3748;
     --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.4);
 }
 
-/* Dark theme specific fixes - comprehensive */
-.dark-theme .card,
-.dark-theme .border.rounded {
-    background-color: var(--card-bg) !important;
-    color: var(--text) !important;
-    border-color: var(--border) !important;
-}
-
-.dark-theme .text-muted {
-    color: var(--text-light) !important;
-}
-
-.dark-theme .dropdown-menu {
-    background-color: var(--card-bg);
-    border-color: var(--border);
-}
-
-.dark-theme .dropdown-item {
-    color: var(--text);
-}
-
-.dark-theme .dropdown-item:hover {
-    background-color: rgba(99, 102, 241, 0.2);
-    color: var(--primary-light);
-}
-
-.dark-theme .btn-light {
-    background-color: var(--card-bg);
-    color: var(--text);
-    border-color: var(--border);
-}
-
-.dark-theme .btn-outline-light {
-    color: var(--text);
-    border-color: var(--text);
-}
-
-.dark-theme .btn-outline-light:hover {
-    background-color: var(--text);
-    color: var(--bg);
-}
-
-/* Fix Bootstrap component colors in dark mode */
-.dark-theme .bg-light {
-    background-color: var(--card-bg) !important;
-}
-
-.dark-theme .bg-white {
-    background-color: var(--card-bg) !important;
-}
-
-.dark-theme .text-dark {
-    color: var(--text) !important;
-}
-
-.dark-theme .navbar-light {
-    background-color: var(--navbar-bg) !important;
-}
-
-.dark-theme .navbar-light .navbar-toggler {
-    border-color: var(--border);
-}
-
-.dark-theme .navbar-light .navbar-toggler-icon {
-    filter: invert(1);
-}
-
-.dark-theme .table {
-    color: var(--text);
-    border-color: var(--border);
-}
-
-.dark-theme .table-hover tbody tr:hover {
-    background-color: rgba(99, 102, 241, 0.1);
-    color: var(--text);
-}
-
-.dark-theme .form-control,
-.dark-theme .form-select {
-    background-color: #0f1823;
-    color: var(--text);
-    border-color: #4a5568;
-}
-
-.dark-theme .form-control:focus,
-.dark-theme .form-select:focus {
-    background-color: #0a0f1b;
-    color: var(--text);
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
-}
-
-
-.dark-theme .alert-info {
-    background-color: rgba(99, 102, 241, 0.2);
-    color: var(--text);
-    border-color: var(--primary);
-}
-
-.dark-theme .blockquote {
-    color: var(--text-light);
-}
-
-.dark-theme .blockquote-footer {
-    color: var(--text-light);
-}
-
-.dark-theme h1,
-.dark-theme h2,
-.dark-theme h3,
-.dark-theme h4,
-.dark-theme h5,
-.dark-theme h6 {
-    color: var(--text);
-}
-
-.dark-theme p {
-    color: var(--text-light);
-}
-
-.dark-theme .lead {
-    color: var(--text-light);
-}
-
-/* Dark theme form fixes */
-.dark-theme ::placeholder {
-    color: #64748b;
-    opacity: 1;
-}
-
-.dark-theme select option {
-    background-color: #1a2332;
-    color: var(--text);
-}
-
-.dark-theme input[type="text"],
-.dark-theme input[type="email"],
-.dark-theme input[type="password"],
-.dark-theme textarea {
-    background-color: #0f1823 !important;
-    border: 1px solid #4a5568 !important;
-}
-
-/* Base styles - Improved typography */
+/* Base */
 * {
     box-sizing: border-box;
 }
@@ -214,7 +65,7 @@ p {
     color: var(--text-light);
 }
 
-/* Modern card design */
+/* Components */
 .card,
 .border.rounded {
     background-color: var(--card-bg) !important;
@@ -222,7 +73,6 @@ p {
     border-radius: var(--radius) !important;
     box-shadow: var(--shadow-sm);
     transition: var(--transition);
-    overflow: hidden;
 }
 
 .card:hover,
@@ -231,25 +81,12 @@ p {
     transform: translateY(-2px);
 }
 
-/* Navbar styling for both themes */
+/* Navigation */
 .navbar {
     background-color: var(--navbar-bg) !important;
     backdrop-filter: blur(10px);
     box-shadow: var(--shadow-sm);
     border-bottom: 1px solid var(--border);
-    transition: var(--transition);
-}
-
-.navbar-toggler {
-    border-color: var(--border);
-}
-
-.dark-theme .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-}
-
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
 .navbar-brand {
@@ -270,17 +107,13 @@ p {
     transition: var(--transition);
 }
 
-.nav-link:hover {
-    background-color: rgba(99, 102, 241, 0.1);
-    color: var(--primary) !important;
-}
-
+.nav-link:hover,
 .nav-link.active {
     background-color: rgba(99, 102, 241, 0.1);
     color: var(--primary) !important;
 }
 
-/* Modern buttons with better hover states */
+/* Buttons */
 .btn {
     font-weight: 500;
     padding: 0.625rem 1.25rem;
@@ -313,8 +146,6 @@ p {
 .btn-outline-primary:hover {
     background: var(--primary);
     color: white;
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
 }
 
 .btn-success {
@@ -327,7 +158,7 @@ p {
     color: white;
 }
 
-/* Improved form controls */
+/* Forms */
 .form-control,
 .form-select {
     border: 2px solid var(--border);
@@ -346,56 +177,93 @@ p {
     outline: none;
 }
 
-/* Better validation states */
-.is-invalid {
-    border-color: var(--danger) !important;
-    background-image: none;
+/* Dark theme specific */
+.dark-theme .card,
+.dark-theme .border.rounded,
+.dark-theme .dropdown-menu {
+    background-color: var(--card-bg) !important;
+    color: var(--text) !important;
+    border-color: var(--border) !important;
 }
 
-.is-valid {
-    border-color: var(--success) !important;
-    background-image: none;
+.dark-theme .text-muted,
+.dark-theme p,
+.dark-theme .lead {
+    color: var(--text-light) !important;
 }
 
-.invalid-feedback {
-    color: var(--danger);
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
+.dark-theme .form-control,
+.dark-theme .form-select,
+.dark-theme input,
+.dark-theme textarea {
+    background-color: #0f1823 !important;
+    border-color: #4a5568 !important;
+    color: var(--text) !important;
 }
 
-/* Enhanced hero section */
+.dark-theme .form-control:focus,
+.dark-theme .form-select:focus {
+    background-color: #0a0f1b !important;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.25);
+}
+
+.dark-theme ::placeholder {
+    color: #64748b;
+    opacity: 1;
+}
+
+.dark-theme .btn-light {
+    background-color: var(--card-bg);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.dark-theme .btn-outline-light {
+    color: var(--text);
+    border-color: var(--text);
+}
+
+.dark-theme .dropdown-item {
+    color: var(--text);
+}
+
+.dark-theme .dropdown-item:hover {
+    background-color: rgba(99, 102, 241, 0.2);
+    color: var(--primary-light);
+}
+
+.dark-theme .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.dark-theme a:not(.btn):not(.nav-link):not(.dropdown-item) {
+    color: var(--primary-light);
+}
+
+.dark-theme .page-link {
+    background-color: var(--card-bg);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.dark-theme .page-link:hover,
+.dark-theme .page-item.active .page-link {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Special sections */
 .hero-section {
     background: var(--gradient);
     color: white;
     padding: 5rem 0;
     position: relative;
-    overflow: hidden;
 }
 
-.hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="none" fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="0.03"><path d="M0 40L40 0H20L0 20M40 40V20L20 40"/></g></g></svg>');
-    background-size: 20px 20px;
-}
-
-.hero-section h1,
-.hero-section p {
-    color: white;
-    position: relative;
-}
-
-/* Modern partner cards */
 .partner-card {
     height: 100%;
     padding: 1.5rem;
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
     transition: var(--transition);
 }
 
@@ -404,14 +272,7 @@ p {
     box-shadow: var(--shadow-lg);
 }
 
-.partner-card h4 {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-/* Improved loading animation */
+/* Utilities */
 .loading-indicator {
     display: inline-block;
     width: 1.25rem;
@@ -428,7 +289,6 @@ p {
     }
 }
 
-/* Better pagination */
 .pagination {
     gap: 0.25rem;
 }
@@ -458,44 +318,12 @@ p {
     cursor: not-allowed;
 }
 
-/* Enhanced footer */
 footer {
     background-color: var(--card-bg) !important;
     border-top: 1px solid var(--border);
     margin-top: 4rem;
 }
 
-/* Better responsive adjustments */
-@media (max-width: 768px) {
-    .hero-section {
-        padding: 3rem 0;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    .navbar-brand {
-        font-size: 1.25rem;
-    }
-}
-
-/* Touch device enhancements */
-@media (hover: none) {
-
-    .card:hover,
-    .partner-card:hover,
-    .btn:hover {
-        transform: none;
-    }
-}
-
-/* Smooth scrolling for the entire page */
-html {
-    scroll-behavior: smooth;
-}
-
-/* Theme toggle button enhancement */
 #theme-toggle {
     background: rgba(99, 102, 241, 0.1);
     border: 2px solid var(--primary);
@@ -509,66 +337,22 @@ html {
     color: white;
 }
 
-/* Add subtle animations to AOS elements */
-[data-aos] {
-    transition-property: transform, opacity;
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 3rem 0;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
 }
 
-/* Better blockquote styling */
-.blockquote {
-    font-size: 1.25rem;
-    font-style: italic;
-    color: var(--text-light);
-    border-left: 4px solid var(--primary);
-    padding-left: 1rem;
-    margin: 2rem 0;
-}
+@media (hover: none) {
 
-/* Improved text selection */
-::selection {
-    background: var(--primary);
-    color: white;
-}
-
-/* Add specific styles for sections */
-section {
-    background-color: var(--bg);
-    color: var(--text);
-}
-
-/* Alternate section backgrounds */
-section:nth-of-type(even) {
-    background-color: var(--card-bg);
-}
-
-/* Fix link colors in dark mode */
-.dark-theme a:not(.btn):not(.nav-link):not(.dropdown-item) {
-    color: var(--primary-light);
-}
-
-.dark-theme a:not(.btn):not(.nav-link):not(.dropdown-item):hover {
-    color: var(--primary);
-}
-
-/* Fix pagination in dark mode */
-.dark-theme .page-link {
-    background-color: var(--card-bg);
-    color: var(--text);
-    border-color: var(--border);
-}
-
-.dark-theme .page-link:hover {
-    background-color: var(--primary);
-    color: white;
-    border-color: var(--primary);
-}
-
-.dark-theme .page-item.active .page-link {
-    background-color: var(--primary);
-    border-color: var(--primary);
-}
-
-.dark-theme .page-item.disabled .page-link {
-    background-color: var(--card-bg);
-    color: var(--text-light);
+    .card:hover,
+    .partner-card:hover,
+    .btn:hover {
+        transform: none;
+    }
 }
