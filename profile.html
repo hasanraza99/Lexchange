@@ -1,35 +1,22 @@
-<!-- Tells the browser this is a HTML5 document -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Set character encoding to the default HTML-5 Standard (which is UTF-8)-->
     <meta charset="UTF-8">
-
-    <!-- Makes the website responsive on mobile and tablet screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="Create your Lexchange profile to start language exchange">
     <title>Lexchange - Profile</title>
 
-    <!-- Link to custom stylesheet -->
-    <link rel="stylesheet" href="css/style.css" />
-
-    <!-- Bootstrap 5 CSS (latest version) from jsdelivr -->
+    <!-- CSS Dependencies -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
-    <!-- AOS Scroll Animations -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
-    <!-- AOS Scroll Animations JS -->
+    <!-- JavaScript Dependencies -->
     <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
-    <!-- Add Chart.js CDN -->
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Bootstrap 5 JS  -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JavaScript scripts -->
+    <!-- Custom JavaScript -->
     <script defer src="js/components.js"></script>
     <script defer src="js/theme.js"></script>
     <script defer src="js/auth.js"></script>
@@ -39,116 +26,107 @@
 </head>
 
 <body>
-
     <!-- Navbar will be injected here -->
-    <div id="navbar-container"></div>
+    <header id="navbar-container"></header>
 
     <!-- Main Content -->
-    <main class="container py-5">
-        <section class="text-center mb-5">
-            <h1 class="fw-bold">Set Up Your Profile</h1>
-            <p class="lead">Choose an avatar, the languages you can teach and want to learn, and write a short bio.</p>
-        </section>
-    
-        <!-- Profile Form Section -->
-        <!-- 
-        We're using Bootstrap's grid system to create a responsive form layout
-        that looks good on all screen sizes. On small screens, fields will stack,
-        while on medium screens and up, we'll use a two-column layout for efficiency.
-        -->
-        <form id="profile-form" class="mx-auto" style="max-width: 800px;" data-aos="fade-up">
-            <!-- Using Bootstrap's row and column classes for a responsive two-column layout -->
-            <div class="row g-4">
-                <!-- Left column for login credentials -->
-                <div class="col-md-6">
-                    <h3 class="mb-3">Login Information</h3>
-
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email (used for login)</label>
-                        <!-- form-control makes the input match Bootstrap's styling -->
-                        <input type="email" class="form-control" id="email" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Create a Password</label>
-                        <input type="password" class="form-control" id="password" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="password-confirm" class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" id="password-confirm" required>
-                        <!-- Small helper text for users -->
-                        <div class="form-text">Both passwords must match.</div>
-                    </div>
+    <main class="container-fluid px-0">
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold">Set Up Your Profile</h1>
+                    <p class="lead">Choose an avatar, the languages you can teach and want to learn, and write a short
+                        bio.</p>
                 </div>
 
-                <!-- Right column for profile information -->
-                <div class="col-md-6">
-                    <h3 class="mb-3">Profile Details</h3>
+                <!-- Profile Form Section -->
+                <form id="profile-form" class="mx-auto" style="max-width: 800px;" data-aos="fade-up">
+                    <div class="row g-4">
+                        <!-- Left column for login credentials -->
+                        <div class="col-md-6">
+                            <h3 class="mb-3">Login Information</h3>
 
-                    <div class="mb-3">
-                        <label for="avatar" class="form-label">Choose Your Avatar</label>
-                        <!-- Using Bootstrap's form-select for styled dropdowns -->
-                        <select id="avatar" class="form-select" required>
-                            <option value="">Select one</option>
-                            <option value="🦉">🦉 Owl</option>
-                            <option value="🐱">🐱 Cat</option>
-                            <option value="🐶">🐶 Dog</option>
-                            <option value="🦊">🦊 Fox</option>
-                            <option value="🐼">🐼 Panda</option>
-                        </select>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email (used for login)</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Create a Password</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="password-confirm" class="form-label">Confirm Password</label>
+                                <input type="password" class="form-control" id="password-confirm" required>
+                                <div class="form-text">Both passwords must match.</div>
+                            </div>
+                        </div>
+
+                        <!-- Right column for profile information -->
+                        <div class="col-md-6">
+                            <h3 class="mb-3">Profile Details</h3>
+
+                            <div class="mb-3">
+                                <label for="avatar" class="form-label">Choose Your Avatar</label>
+                                <select id="avatar" class="form-select" required>
+                                    <option value="">Select one</option>
+                                    <option value="🦉">🦉 Owl</option>
+                                    <option value="🐱">🐱 Cat</option>
+                                    <option value="🐶">🐶 Dog</option>
+                                    <option value="🦊">🦊 Fox</option>
+                                    <option value="🐼">🐼 Panda</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="teach" class="form-label">Language You Can Teach</label>
+                                <select id="teach" class="form-select" required>
+                                    <option value="">Select one</option>
+                                    <option value="English">English</option>
+                                    <option value="French">French</option>
+                                    <option value="Spanish">Spanish</option>
+                                    <option value="German">German</option>
+                                    <option value="Arabic">Arabic</option>
+                                    <option value="Japanese">Japanese</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="learn" class="form-label">Language You Want to Learn</label>
+                                <select id="learn" class="form-select" required>
+                                    <option value="">Select one</option>
+                                    <option value="English">English</option>
+                                    <option value="French">French</option>
+                                    <option value="Spanish">Spanish</option>
+                                    <option value="German">German</option>
+                                    <option value="Arabic">Arabic</option>
+                                    <option value="Japanese">Japanese</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Bio section uses the full width -->
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <label for="bio" class="form-label">Short Bio</label>
+                                <textarea id="bio" class="form-control" rows="4" required
+                                    placeholder="Tell potential partners about yourself, your interests, and your language learning goals"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Submit button -->
+                        <div class="col-12 text-center">
+                            <button type="submit" class="btn btn-success btn-lg w-100 w-md-auto">Save Profile</button>
+                        </div>
                     </div>
-
-                    <div class="mb-3">
-                        <label for="teach" class="form-label">Language You Can Teach</label>
-                        <select id="teach" class="form-select" required>
-                            <option value="">Select one</option>
-                            <option value="English">English</option>
-                            <option value="French">French</option>
-                            <option value="Spanish">Spanish</option>
-                            <option value="German">German</option>
-                            <option value="Arabic">Arabic</option>
-                            <option value="Japanese">Japanese</option>
-                        </select>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="learn" class="form-label">Language You Want to Learn</label>
-                        <select id="learn" class="form-select" required>
-                            <option value="">Select one</option>
-                            <option value="English">English</option>
-                            <option value="French">French</option>
-                            <option value="Spanish">Spanish</option>
-                            <option value="German">German</option>
-                            <option value="Arabic">Arabic</option>
-                            <option value="Japanese">Japanese</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Bio section uses the full width on all screen sizes -->
-                <div class="col-12">
-                    <div class="mb-3">
-                        <label for="bio" class="form-label">Short Bio</label>
-                        <!-- Using rows attribute to make the textarea larger -->
-                        <textarea id="bio" class="form-control" rows="4" required
-                            placeholder="Tell potential partners about yourself, your interests, and your language learning goals"></textarea>
-                    </div>
-                </div>
-
-                <!-- Submit button centered and full-width on mobile, auto-width on larger screens -->
-                <div class="col-12 text-center">
-                    <!-- Using Bootstrap's responsive utility classes to control button width -->
-                    <button type="submit" class="btn btn-success btn-lg w-100 w-md-auto">Save Profile</button>
-                </div>
+                </form>
             </div>
-        </form>
+        </section>
     </main>
 
-
     <!-- Footer will be injected here -->
-    <div id="footer-container"></div>
-
+    <footer id="footer-container"></footer>
 </body>
 
 </html>

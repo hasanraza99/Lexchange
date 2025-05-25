@@ -1,35 +1,22 @@
-<!-- Tells the browser this is a HTML5 document -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Set character encoding to the default HTML-5 Standard (which is UTF-8)-->
     <meta charset="UTF-8">
-
-    <!-- Makes the website responsive on mobile and tablet screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="Learn about Lexchange - the safe, free language exchange platform">
     <title>Lexchange - About</title>
 
-    <!-- Link to custom stylesheet -->
-    <link rel="stylesheet" href="css/style.css" />
-
-    <!-- Bootstrap 5 CSS (latest version) from jsdelivr -->
+    <!-- CSS Dependencies -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
-    <!-- AOS Scroll Animations -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
-    <!-- AOS Scroll Animations JS -->
+    <!-- JavaScript Dependencies -->
     <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
-    <!-- Add Chart.js CDN -->
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Bootstrap 5 JS  -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JavaScript scripts -->
+    <!-- Custom JavaScript -->
     <script defer src="js/components.js"></script>
     <script defer src="js/theme.js"></script>
     <script defer src="js/auth.js"></script>
@@ -43,97 +30,90 @@
     <header id="navbar-container"></header>
 
     <!-- Main Content -->
-    <main class="container py-5">
-        <section class="text-center mb-5">
-            <h1 class="fw-bold">About Lexchange</h1>
-            <p class="lead">We believe the best way to learn a language is by speaking it. Lexchange makes that easy,
-                fun,
-                and safe.</p>
-        </section>
-
-        <section class="row text-center g-4">
-            <div class="col-md-4" data-aos="fade-up">
-                <div class="p-4 border rounded h-100">
-                    <h3>🎯 Our Mission</h3>
-                    <p>To democratise access to real language practice — free, fair, and human-centered.</p>
+    <main class="container-fluid px-0">
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold">About Lexchange</h1>
+                    <p class="lead">We believe the best way to learn a language is by speaking it. Lexchange makes that
+                        easy, fun, and safe.</p>
                 </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-4 border rounded h-100">
-                    <h3>🧠 Our Approach</h3>
-                    <p>Match users based on mutual teaching/learning interests with no premium paywalls or weirdness.
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                <div class="p-4 border rounded h-100">
-                    <h3>🛡️ Our Promise</h3>
-                    <p>Lexchange is designed to prioritise trust, safety, and respectful conversation above all else.
-                    </p>
-                </div>
-            </div>
-        </section>
 
-        <!-- New "Our Story" section -->
-        <section class="col-md-12 mt-5" data-aos="fade-up" data-aos-delay="300">
-            <div class="p-4 border rounded">
-                <h3 class="text-center mb-4">📈 Our Story</h3>
-                <p>Lexchange began in 2023 when a group of language enthusiasts wanted to create a platform focused on
-                    authentic conversation practice without the barriers found on other platforms. We noticed that many
-                    existing language exchange platforms were either cluttered with ads, had poor matching systems, or
-                    lacked important safety features.</p>
-                <p>Our team has personal experience with the challenges of language learning, having collectively
-                    studied over 15 different languages. We understand firsthand how crucial regular conversation
-                    practice is for fluency, and we're committed to making that accessible to everyone.</p>
-            </div>
-        </section>
-
-        <!-- "How it Works" section with responsive card layout -->
-        <section class="mt-5">
-            <h2 class="text-center mb-4">How Lexchange Works</h2>
-
-            <!-- 
-                Using Bootstrap's grid system with responsive column classes:
-                - On mobile screens (xs), each card takes the full width (12 columns)
-                - On small screens (sm), each card takes half the width (6 columns)
-                - On medium screens and up (md+), we show 3 cards per row (4 columns each)
-                
-                This creates a layout that adapts to the available screen space.
-            -->
-            <div class="row g-4">
-                <!-- Step 1 card -->
-                <div class="col-12 col-sm-6 col-md-4" data-aos="fade-up">
-                    <!-- Using h-100 to make all cards in the row the same height -->
-                    <div class="text-center p-3 border rounded h-100">
-                        <!-- Using Bootstrap's text utilities for consistent styling -->
-                        <h3 class="fs-4 mb-3">1. Create Your Profile</h3>
-                        <div class="text-center mb-3">
-                            <!-- Large emoji icon for visual interest -->
-                            <span style="font-size: 2.5rem;">👤</span>
+                <div class="row text-center g-4">
+                    <div class="col-md-4" data-aos="fade-up">
+                        <div class="p-4 border rounded h-100">
+                            <h3>🎯 Our Mission</h3>
+                            <p>To democratise access to real language practice — free, fair, and human-centered.</p>
                         </div>
-                        <p>Choose languages you speak and ones you want to learn. Add a short bio about your interests.</p>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="p-4 border rounded h-100">
+                            <h3>🧠 Our Approach</h3>
+                            <p>Match users based on mutual teaching/learning interests with no premium paywalls or
+                                weirdness.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                        <div class="p-4 border rounded h-100">
+                            <h3>🛡️ Our Promise</h3>
+                            <p>Lexchange is designed to prioritise trust, safety, and respectful conversation above all
+                                else.</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Step 2 card -->
-                <div class="col-12 col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="text-center p-3 border rounded h-100">
-                        <h3 class="fs-4 mb-3">2. Browse Partners</h3>
-                        <div class="text-center mb-3">
-                            <span style="font-size: 2.5rem;">🔍</span>
+                <!-- Our Story section -->
+                <div class="row mt-5">
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="300">
+                        <div class="p-4 border rounded">
+                            <h3 class="text-center mb-4">📈 Our Story</h3>
+                            <p>Lexchange began in 2023 when a group of language enthusiasts wanted to create a platform
+                                focused on authentic conversation practice without the barriers found on other
+                                platforms. We noticed that many existing language exchange platforms were either
+                                cluttered with ads, had poor matching systems, or lacked important safety features.</p>
+                            <p>Our team has personal experience with the challenges of language learning, having
+                                collectively studied over 15 different languages. We understand firsthand how crucial
+                                regular conversation practice is for fluency, and we're committed to making that
+                                accessible to everyone.</p>
                         </div>
-                        <p>Find language partners with complementary learning goals to yours.</p>
                     </div>
                 </div>
 
-                <!-- Step 3 card -->
-                <div class="col-12 col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="text-center p-3 border rounded h-100">
-                        <h3 class="fs-4 mb-3">3. Start Practicing</h3>
-                        <div class="text-center mb-3">
-                            <span style="font-size: 2.5rem;">💬</span>
+                <!-- How it Works section -->
+                <div class="mt-5">
+                    <h2 class="text-center mb-4">How Lexchange Works</h2>
+                    <div class="row g-4">
+                        <div class="col-12 col-sm-6 col-md-4" data-aos="fade-up">
+                            <div class="text-center p-3 border rounded h-100">
+                                <h3 class="fs-4 mb-3">1. Create Your Profile</h3>
+                                <div class="text-center mb-3">
+                                    <span style="font-size: 2.5rem;">👤</span>
+                                </div>
+                                <p>Choose languages you speak and ones you want to learn. Add a short bio about your
+                                    interests.</p>
+                            </div>
                         </div>
-                        <p>Use our conversation prompts or create your own topics to begin improving together.</p>
+
+                        <div class="col-12 col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="text-center p-3 border rounded h-100">
+                                <h3 class="fs-4 mb-3">2. Browse Partners</h3>
+                                <div class="text-center mb-3">
+                                    <span style="font-size: 2.5rem;">🔍</span>
+                                </div>
+                                <p>Find language partners with complementary learning goals to yours.</p>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-6 col-md-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="text-center p-3 border rounded h-100">
+                                <h3 class="fs-4 mb-3">3. Start Practicing</h3>
+                                <div class="text-center mb-3">
+                                    <span style="font-size: 2.5rem;">💬</span>
+                                </div>
+                                <p>Use our conversation prompts or create your own topics to begin improving together.
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

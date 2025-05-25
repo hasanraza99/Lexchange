@@ -1,35 +1,22 @@
-<!-- Tells the browser this is a HTML5 document -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <!-- Set character encoding to the default HTML-5 Standard (which is UTF-8)-->
     <meta charset="UTF-8">
-
-    <!-- Makes the website responsive on mobile and tablet screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <meta name="description" content="Report concerns or issues on Lexchange">
     <title>Lexchange - Report</title>
 
-    <!-- Link to custom stylesheet -->
-    <link rel="stylesheet" href="css/style.css" />
-
-    <!-- Bootstrap 5 CSS (latest version) from jsdelivr -->
+    <!-- CSS Dependencies -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
-    <!-- AOS Scroll Animations -->
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 
-    <!-- AOS Scroll Animations JS -->
+    <!-- JavaScript Dependencies -->
     <script defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-
-    <!-- Add Chart.js CDN -->
-    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Bootstrap 5 JS  -->
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom JavaScript scripts -->
+    <!-- Custom JavaScript -->
     <script defer src="js/components.js"></script>
     <script defer src="js/theme.js"></script>
     <script defer src="js/auth.js"></script>
@@ -39,46 +26,47 @@
 </head>
 
 <body>
-
     <!-- Navbar will be injected here -->
-    <div id="navbar-container"></div>
+    <header id="navbar-container"></header>
 
     <!-- Main Content -->
+    <main class="container-fluid px-0">
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold">Report a Concern</h1>
+                    <p class="lead">Help keep Lexchange respectful and safe. Use this form to report inappropriate
+                        behaviour.</p>
+                </div>
 
-    <!-- my5 means m:margin y:vertical direction (top and bottom) 5:size, so my-2 adds margin to top and bottom of scale 5-->
-    <main class="container py-5">
-        <section class="text-center mb-5">
-            <h1 class="fw-bold">Report a Concern</h1>
-            <p class="lead">Help keep Lexchange respectful and safe. Use this form to report inappropriate behaviour.</p>
+                <form class="mx-auto" style="max-width: 600px;" data-aos="fade-up">
+                    <div class="mb-3">
+                        <label for="reportedUser" class="form-label">Reported User</label>
+                        <input type="text" class="form-control" id="reportedUser" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reason" class="form-label">Reason</label>
+                        <select class="form-select" id="reason" required>
+                            <option value="">Select a reason</option>
+                            <option value="Harassment">Harassment</option>
+                            <option value="Inappropriate content">Inappropriate content</option>
+                            <option value="Spam or fake profile">Spam or fake profile</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="details" class="form-label">Details (optional)</label>
+                        <textarea class="form-control" id="details" rows="4"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-danger">Submit Report</button>
+                    </div>
+                </form>
+            </div>
         </section>
-
-        <form class="mx-auto" style="max-width: 600px;" data-aos="fade-up">
-            <div class="mb-3">
-                <label for="reportedUser" class="form-label">Reported User</label>
-                <input type="text" class="form-control" id="reportedUser" required>
-            </div>
-            <div class="mb-3">
-                <label for="reason" class="form-label">Reason</label>
-                <select class="form-select" id="reason" required>
-                    <option value="">Select a reason</option>
-                    <option value="Harassment">Harassment</option>
-                    <option value="Inappropriate content">Inappropriate content</option>
-                    <option value="Spam or fake profile">Spam or fake profile</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="details" class="form-label">Details (optional)</label>
-                <textarea class="form-control" id="details" rows="4"></textarea>
-            </div>
-            <div class="text-center">
-                <button type="submit" class="btn btn-danger">Submit Report</button>
-            </div>
-        </form>
     </main>
 
     <!-- Footer will be injected here -->
-    <div id="footer-container"></div>
-
+    <footer id="footer-container"></footer>
 </body>
 
 </html>

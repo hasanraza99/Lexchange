@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Practice language skills with conversation prompts, vocabulary builders, and interactive exercises">
+    <meta name="description" content="Practice language skills with conversation prompts and interactive exercises">
     <title>Lexchange - Practice Resources</title>
 
     <!-- CSS Dependencies -->
@@ -21,8 +20,8 @@
     <script defer src="js/components.js"></script>
     <script defer src="js/theme.js"></script>
     <script defer src="js/auth.js"></script>
-    <script defer src="js/content.js"></script>
     <script defer src="js/auth-flow.js"></script>
+    <script defer src="js/content.js"></script>
     <script defer src="js/main.js"></script>
 </head>
 
@@ -31,214 +30,219 @@
     <header id="navbar-container"></header>
 
     <!-- Main Content -->
-    <main class="container py-5">
-        <section class="text-center mb-5">
-            <h1 class="fw-bold">Practice Resources</h1>
-            <p class="lead">Interactive tools and conversation starters for effective language practice</p>
-        </section>
+    <main class="container-fluid px-0">
+        <section class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h1 class="fw-bold">Practice Resources</h1>
+                    <p class="lead">Interactive tools and conversation starters for effective language practice</p>
+                </div>
 
-        <!-- Conversation Topics Section -->
-        <section class="mb-5">
-            <h2 class="text-center mb-4">💬 Conversation Topics</h2>
-            <div class="row g-4">
-                <!-- Beginner Topics -->
-                <div class="col-lg-4" data-aos="fade-up">
-                    <div class="card h-100">
+                <!-- Conversation Topics Section -->
+                <div class="mb-5">
+                    <h2 class="text-center mb-4">💬 Conversation Topics</h2>
+                    <div class="row g-4">
+                        <!-- Beginner Topics -->
+                        <div class="col-lg-4" data-aos="fade-up">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">🌟 Beginner</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">• What's your daily routine?</li>
+                                        <li class="mb-2">• Describe your family and friends</li>
+                                        <li class="mb-2">• What's your favourite food?</li>
+                                        <li class="mb-2">• Tell me about your hometown</li>
+                                        <li class="mb-2">• What hobbies do you enjoy?</li>
+                                    </ul>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="generateTopic('beginner')">
+                                        Get Random Topic
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Intermediate Topics -->
+                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">📚 Intermediate</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">• Describe a memorable travel experience</li>
+                                        <li class="mb-2">• What are your career goals?</li>
+                                        <li class="mb-2">• How has technology changed your life?</li>
+                                        <li class="mb-2">• Discuss your favorite book or movie</li>
+                                        <li class="mb-2">• What traditions are important in your culture?</li>
+                                    </ul>
+                                    <button class="btn btn-sm btn-outline-primary"
+                                        onclick="generateTopic('intermediate')">
+                                        Get Random Topic
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Topics -->
+                        <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">🚀 Advanced</h5>
+                                    <ul class="list-unstyled">
+                                        <li class="mb-2">• What's your opinion on social media's impact?</li>
+                                        <li class="mb-2">• How should we address climate change?</li>
+                                        <li class="mb-2">• Discuss the pros and cons of remote work</li>
+                                        <li class="mb-2">• What ethical issues does AI raise?</li>
+                                        <li class="mb-2">• How has globalization affected your country?</li>
+                                    </ul>
+                                    <button class="btn btn-sm btn-outline-primary" onclick="generateTopic('advanced')">
+                                        Get Random Topic
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Random topic display -->
+                    <div id="random-topic-display" class="alert alert-info mt-4 d-none" role="alert">
+                        <strong>Your topic:</strong> <span id="topic-text"></span>
+                    </div>
+                </div>
+
+                <!-- Pronunciation Practice Section -->
+                <div class="mb-5" data-aos="fade-up">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h3 class="mb-4">🗣️ Pronunciation Practice</h3>
+                            <p>Click to hear common phrases in different languages:</p>
+
+                            <!-- Language selector -->
+                            <div class="mb-3">
+                                <select id="language-selector" class="form-select w-auto mx-auto">
+                                    <option value="en-US">English (US)</option>
+                                    <option value="en-GB">English (UK)</option>
+                                    <option value="fr-FR">French</option>
+                                    <option value="es-ES">Spanish</option>
+                                    <option value="de-DE">German</option>
+                                    <option value="it-IT">Italian</option>
+                                </select>
+                            </div>
+
+                            <!-- Common phrases -->
+                            <div class="d-flex flex-wrap justify-content-center gap-2">
+                                <button class="btn btn-outline-primary" onclick="speakPhrase('Hello, how are you?')">
+                                    Hello
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="speakPhrase('Thank you very much')">
+                                    Thank You
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="speakPhrase('Nice to meet you')">
+                                    Nice to Meet
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="speakPhrase('Excuse me')">
+                                    Excuse Me
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="speakPhrase('I don\'t understand')">
+                                    Don't Understand
+                                </button>
+                                <button class="btn btn-outline-primary" onclick="speakPhrase('Could you repeat that?')">
+                                    Repeat Please
+                                </button>
+                            </div>
+
+                            <!-- Custom phrase input -->
+                            <div class="mt-4">
+                                <div class="input-group mx-auto" style="max-width: 500px;">
+                                    <input type="text" id="custom-phrase" class="form-control"
+                                        placeholder="Type any phrase to practice">
+                                    <button class="btn btn-primary" onclick="speakCustomPhrase()">
+                                        Speak
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language Tips Section -->
+                <div class="mb-5" data-aos="fade-up">
+                    <h2 class="text-center mb-4">💡 Language Learning Tips</h2>
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">📱 Daily Practice Ideas</h5>
+                                    <ul class="mb-0">
+                                        <li>Change your phone language settings</li>
+                                        <li>Keep a journal in your target language</li>
+                                        <li>Listen to podcasts during commute</li>
+                                        <li>Watch shows with subtitles</li>
+                                        <li>Think in your target language</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">🎯 Effective Session Tips</h5>
+                                    <ul class="mb-0">
+                                        <li>Set specific goals for each session</li>
+                                        <li>Balance speaking and listening time</li>
+                                        <li>Don't be afraid to make mistakes</li>
+                                        <li>Ask for corrections and feedback</li>
+                                        <li>Take notes of new vocabulary</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vocabulary Builder Section -->
+                <div data-aos="fade-up">
+                    <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">🌟 Beginner</h5>
-                            <ul class="list-unstyled">
-                                <li class="mb-2">• What's your daily routine?</li>
-                                <li class="mb-2">• Describe your family and friends</li>
-                                <li class="mb-2">• What's your favourite food?</li>
-                                <li class="mb-2">• Tell me about your hometown</li>
-                                <li class="mb-2">• What hobbies do you enjoy?</li>
-                            </ul>
-                            <button class="btn btn-sm btn-outline-primary" onclick="generateTopic('beginner')">
-                                Get Random Topic
-                            </button>
+                            <h3 class="text-center mb-4">📝 Quick Vocabulary Builder</h3>
+                            <p class="text-center">Common phrases for language exchange sessions:</p>
+
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>English</th>
+                                            <th>Spanish</th>
+                                            <th>French</th>
+                                            <th>German</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Can you repeat?</td>
+                                            <td>¿Puedes repetir?</td>
+                                            <td>Peux-tu répéter?</td>
+                                            <td>Kannst du wiederholen?</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Speak slower please</td>
+                                            <td>Habla más despacio</td>
+                                            <td>Parle plus lentement</td>
+                                            <td>Sprich langsamer bitte</td>
+                                        </tr>
+                                        <tr>
+                                            <td>How do you say...?</td>
+                                            <td>¿Cómo se dice...?</td>
+                                            <td>Comment dit-on...?</td>
+                                            <td>Wie sagt man...?</td>
+                                        </tr>
+                                        <tr>
+                                            <td>What does ... mean?</td>
+                                            <td>¿Qué significa...?</td>
+                                            <td>Que signifie...?</td>
+                                            <td>Was bedeutet...?</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <!-- Intermediate Topics -->
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">📚 Intermediate</h5>
-                            <ul class="list-unstyled">
-                                <li class="mb-2">• Describe a memorable travel experience</li>
-                                <li class="mb-2">• What are your career goals?</li>
-                                <li class="mb-2">• How has technology changed your life?</li>
-                                <li class="mb-2">• Discuss your favorite book or movie</li>
-                                <li class="mb-2">• What traditions are important in your culture?</li>
-                            </ul>
-                            <button class="btn btn-sm btn-outline-primary" onclick="generateTopic('intermediate')">
-                                Get Random Topic
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Advanced Topics -->
-                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">🚀 Advanced</h5>
-                            <ul class="list-unstyled">
-                                <li class="mb-2">• What's your opinion on social media's impact?</li>
-                                <li class="mb-2">• How should we address climate change?</li>
-                                <li class="mb-2">• Discuss the pros and cons of remote work</li>
-                                <li class="mb-2">• What ethical issues does AI raise?</li>
-                                <li class="mb-2">• How has globalization affected your country?</li>
-                            </ul>
-                            <button class="btn btn-sm btn-outline-primary" onclick="generateTopic('advanced')">
-                                Get Random Topic
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Random topic display -->
-            <div id="random-topic-display" class="alert alert-info mt-4 d-none" role="alert">
-                <strong>Your topic:</strong> <span id="topic-text"></span>
-            </div>
-        </section>
-
-        <!-- Pronunciation Practice Section -->
-        <section class="mb-5" data-aos="fade-up">
-            <div class="card">
-                <div class="card-body text-center">
-                    <h3 class="mb-4">🗣️ Pronunciation Practice</h3>
-                    <p>Click to hear common phrases in different languages:</p>
-
-                    <!-- Language selector -->
-                    <div class="mb-3">
-                        <select id="language-selector" class="form-select w-auto mx-auto">
-                            <option value="en-US">English (US)</option>
-                            <option value="en-GB">English (UK)</option>
-                            <option value="fr-FR">French</option>
-                            <option value="es-ES">Spanish</option>
-                            <option value="de-DE">German</option>
-                            <option value="it-IT">Italian</option>
-                        </select>
-                    </div>
-
-                    <!-- Common phrases -->
-                    <div class="d-flex flex-wrap justify-content-center gap-2">
-                        <button class="btn btn-outline-primary" onclick="speakPhrase('Hello, how are you?')">
-                            Hello
-                        </button>
-                        <button class="btn btn-outline-primary" onclick="speakPhrase('Thank you very much')">
-                            Thank You
-                        </button>
-                        <button class="btn btn-outline-primary" onclick="speakPhrase('Nice to meet you')">
-                            Nice to Meet
-                        </button>
-                        <button class="btn btn-outline-primary" onclick="speakPhrase('Excuse me')">
-                            Excuse Me
-                        </button>
-                        <button class="btn btn-outline-primary" onclick="speakPhrase('I don\'t understand')">
-                            Don't Understand
-                        </button>
-                        <button class="btn btn-outline-primary" onclick="speakPhrase('Could you repeat that?')">
-                            Repeat Please
-                        </button>
-                    </div>
-
-                    <!-- Custom phrase input -->
-                    <div class="mt-4">
-                        <div class="input-group mx-auto" style="max-width: 500px;">
-                            <input type="text" id="custom-phrase" class="form-control"
-                                placeholder="Type any phrase to practice">
-                            <button class="btn btn-primary" onclick="speakCustomPhrase()">
-                                Speak
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Language Tips Section -->
-        <section class="mb-5" data-aos="fade-up">
-            <h2 class="text-center mb-4">💡 Language Learning Tips</h2>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">📱 Daily Practice Ideas</h5>
-                            <ul class="mb-0">
-                                <li>Change your phone language settings</li>
-                                <li>Keep a journal in your target language</li>
-                                <li>Listen to podcasts during commute</li>
-                                <li>Watch shows with subtitles</li>
-                                <li>Think in your target language</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">🎯 Effective Session Tips</h5>
-                            <ul class="mb-0">
-                                <li>Set specific goals for each session</li>
-                                <li>Balance speaking and listening time</li>
-                                <li>Don't be afraid to make mistakes</li>
-                                <li>Ask for corrections and feedback</li>
-                                <li>Take notes of new vocabulary</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Vocabulary Builder Section -->
-        <section data-aos="fade-up">
-            <div class="card">
-                <div class="card-body">
-                    <h3 class="text-center mb-4">📝 Quick Vocabulary Builder</h3>
-                    <p class="text-center">Common phrases for language exchange sessions:</p>
-
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>English</th>
-                                    <th>Spanish</th>
-                                    <th>French</th>
-                                    <th>German</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Can you repeat?</td>
-                                    <td>¿Puedes repetir?</td>
-                                    <td>Peux-tu répéter?</td>
-                                    <td>Kannst du wiederholen?</td>
-                                </tr>
-                                <tr>
-                                    <td>Speak slower please</td>
-                                    <td>Habla más despacio</td>
-                                    <td>Parle plus lentement</td>
-                                    <td>Sprich langsamer bitte</td>
-                                </tr>
-                                <tr>
-                                    <td>How do you say...?</td>
-                                    <td>¿Cómo se dice...?</td>
-                                    <td>Comment dit-on...?</td>
-                                    <td>Wie sagt man...?</td>
-                                </tr>
-                                <tr>
-                                    <td>What does ... mean?</td>
-                                    <td>¿Qué significa...?</td>
-                                    <td>Que signifie...?</td>
-                                    <td>Was bedeutet...?</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
@@ -249,51 +253,6 @@
     <footer id="footer-container"></footer>
 
     <script>
-        // Topic generation
-        const topics = {
-            beginner: [
-                "Describe your morning routine in detail",
-                "What's your favorite season and why?",
-                "Tell me about your best friend",
-                "What do you like to eat for breakfast?",
-                "Describe your ideal weekend",
-                "What's your favorite holiday?",
-                "Tell me about your neighborhood",
-                "What sports or games do you enjoy?"
-            ],
-            intermediate: [
-                "How has social media changed communication?",
-                "What's the most interesting place you've visited?",
-                "Describe a challenge you've overcome",
-                "What would you change about your education system?",
-                "How do you stay motivated?",
-                "What's a skill you'd like to learn?",
-                "Discuss the importance of work-life balance",
-                "What makes a good leader?"
-            ],
-            advanced: [
-                "Should artificial intelligence be regulated? How?",
-                "What are the ethical implications of genetic engineering?",
-                "How can we balance economic growth with environmental protection?",
-                "Discuss the impact of cryptocurrency on traditional banking",
-                "What role should governments play in addressing inequality?",
-                "How has the pandemic changed society permanently?",
-                "Should social media companies be held responsible for content?",
-                "What are the pros and cons of universal basic income?"
-            ]
-        };
-
-        function generateTopic(level) {
-            const topicList = topics[level];
-            const randomTopic = topicList[Math.floor(Math.random() * topicList.length)];
-
-            const display = document.getElementById('random-topic-display');
-            const topicText = document.getElementById('topic-text');
-
-            display.classList.remove('d-none');
-            topicText.textContent = randomTopic;
-        }
-
         // Enhanced speech synthesis with language selection
         function speakPhrase(text) {
             if ('speechSynthesis' in window) {

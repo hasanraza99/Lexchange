@@ -236,6 +236,11 @@ function loadDashboard() {
       'No perfect matches found. Try browsing all partners!'
     );
   });
+
+    // Create progress chart if container exists
+  if (document.getElementById('progressChart')) {
+    createProgressChart();
+  }
 }
 
 // Speech synthesis
@@ -268,3 +273,36 @@ window.generateTopic = function(level) {
     text.textContent = topic;
   }
 };
+
+// Create progress chart for dashboard
+function createProgressChart() {
+  const ctx = document.getElementById('progressChart');
+  if (!ctx || typeof Chart === 'undefined') return;
+  
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Completed', 'In Progress', 'To Do'],
+      datasets: [{
+        data: [65, 25, 10],
+        backgroundColor: ['#10b981', '#f59e0b', '#ef4444'],
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { 
+        legend: { 
+          position: 'bottom',
+          labels: {
+            padding: 20,
+            font: { size: 14 }
+          }
+        } 
+      }
+    }
+  });
+}
+
+// Make createProgressChart globally available
+window.createProgressChart = createProgressChart;
