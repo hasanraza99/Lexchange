@@ -213,7 +213,7 @@ function loadDashboard() {
       <div class="col-sm-6"><strong>I'm learning:</strong> ${userData.learn}</div>
       <div class="col-12"><strong>Bio:</strong> ${userData.bio}</div>
     </div>
-    <div class="mt-3 d-flex gap-2 flex-wrap">
+    <div class="mt-3 d-flex gap-2 justify-content-center">
       <button id="find-matches-btn" class="btn btn-success">Find My Best Matches</button>
       <button id="logout-btn" class="btn btn-outline-danger">Log Out</button>
     </div>

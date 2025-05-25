@@ -241,6 +241,16 @@ p {
     position: relative;
 }
 
+.hero-section p.lead {
+    color: #000000 !important;
+    font-weight: 500;
+    text-shadow: none;
+}
+
+.form-text {
+    color: var(--text) !important;
+}
+
 .partner-card {
     height: 100%;
     padding: 1.5rem;
