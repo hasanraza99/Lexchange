@@ -1,6 +1,5 @@
-/* Core theme variables */
+/* Core Variables */
 :root {
-    /* Colors */
     --primary: #6366f1;
     --primary-dark: #4f46e5;
     --primary-light: #818cf8;
@@ -9,13 +8,9 @@
     --text: #1f2937;
     --text-light: #6b7280;
     --border: #e5e7eb;
-
-    /* Light theme */
     --bg: #f9fafb;
     --card-bg: #ffffff;
     --navbar-bg: rgba(255, 255, 255, 0.95);
-
-    /* Layout */
     --radius: 0.75rem;
     --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
     --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
@@ -24,7 +19,6 @@
     --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-/* Dark theme */
 .dark-theme {
     --bg: #0a0f1b;
     --card-bg: #1a2332;
@@ -79,6 +73,13 @@ p {
 .border.rounded:hover {
     box-shadow: var(--shadow);
     transform: translateY(-2px);
+}
+
+.card-header {
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    background-color: transparent;
 }
 
 /* Navigation */
@@ -177,7 +178,116 @@ p {
     outline: none;
 }
 
-/* Dark theme specific */
+/* Progress & Stats */
+.progress {
+    height: 8px;
+    background-color: var(--border);
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+}
+
+.border-end {
+    border-color: var(--border) !important;
+}
+
+/* Tables */
+.table {
+    color: var(--text);
+}
+
+.table th,
+.table td {
+    border-color: var(--border);
+    color: var(--text);
+}
+
+/* Pagination */
+.pagination {
+    gap: 0.25rem;
+}
+
+.page-link {
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    transition: var(--transition);
+}
+
+.page-link:hover {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Special Sections */
+.hero-section {
+    background: var(--gradient);
+    color: white;
+    padding: 5rem 0;
+    position: relative;
+}
+
+.partner-card {
+    height: 100%;
+    padding: 1.5rem;
+    transition: var(--transition);
+}
+
+.partner-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+footer {
+    background-color: var(--card-bg) !important;
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+}
+
+#theme-toggle {
+    background: rgba(99, 102, 241, 0.1);
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 0.375rem 0.75rem;
+    font-size: 0.875rem;
+}
+
+#theme-toggle:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.loading-indicator {
+    display: inline-block;
+    width: 1.25rem;
+    height: 1.25rem;
+    border: 3px solid rgba(99, 102, 241, 0.2);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Dark Theme */
 .dark-theme .card,
 .dark-theme .border.rounded,
 .dark-theme .dropdown-menu {
@@ -253,88 +363,32 @@ p {
     border-color: var(--primary);
 }
 
-/* Special sections */
-.hero-section {
-    background: var(--gradient);
-    color: white;
-    padding: 5rem 0;
-    position: relative;
-}
-
-.partner-card {
-    height: 100%;
-    padding: 1.5rem;
-    transition: var(--transition);
-}
-
-.partner-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-}
-
-/* Utilities */
-.loading-indicator {
-    display: inline-block;
-    width: 1.25rem;
-    height: 1.25rem;
-    border: 3px solid rgba(99, 102, 241, 0.2);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.pagination {
-    gap: 0.25rem;
-}
-
-.page-link {
+.dark-theme .table {
     color: var(--text);
-    border: 1px solid var(--border);
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    transition: var(--transition);
+    --bs-table-bg: var(--card-bg);
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
+    --bs-table-hover-bg: rgba(99, 102, 241, 0.1);
+    border-color: var(--border);
 }
 
-.page-link:hover {
-    background-color: var(--primary);
-    color: white;
-    border-color: var(--primary);
+.dark-theme .table th,
+.dark-theme .table td {
+    border-color: var(--border);
+    color: var(--text);
 }
 
-.page-item.active .page-link {
-    background-color: var(--primary);
-    border-color: var(--primary);
-    color: white;
+.dark-theme .table thead th {
+    background-color: rgba(99, 102, 241, 0.1);
+    color: var(--text);
+    border-color: var(--border);
 }
 
-.page-item.disabled .page-link {
-    opacity: 0.5;
-    cursor: not-allowed;
+.dark-theme .card {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
 }
 
-footer {
-    background-color: var(--card-bg) !important;
-    border-top: 1px solid var(--border);
-    margin-top: 4rem;
-}
-
-#theme-toggle {
-    background: rgba(99, 102, 241, 0.1);
-    border: 2px solid var(--primary);
-    color: var(--primary);
-    padding: 0.375rem 0.75rem;
-    font-size: 0.875rem;
-}
-
-#theme-toggle:hover {
-    background: var(--primary);
-    color: white;
+.dark-theme .card:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
 /* Responsive */

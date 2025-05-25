@@ -40,41 +40,158 @@
                     <h1 class="fw-bold">My Dashboard</h1>
                     <p class="lead">Track your learning activity and recent matches.</p>
                 </div>
-
                 <div class="row g-4">
-                    <div class="col-md-6" data-aos="fade-up">
-                        <div class="p-4 border rounded h-100">
-                            <h5 id="user-greeting">👋 Welcome back</h5>
-                            <div id="user-profile">
-                                <!-- User profile will be loaded here -->
-                                <p>Loading your profile...</p>
+                    <!-- Welcome Card -->
+                    <div class="col-lg-8" data-aos="fade-up">
+                        <div class="card h-100">
+                            <div class="card-body p-4">
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <h4 id="user-greeting" class="mb-0">👋 Welcome back</h4>
+                                    <span class="badge bg-success">Online</span>
+                                </div>
+                
+                                <div id="user-profile" class="text-center">
+                                    <!-- Profile avatar -->
+                                    <div class="mb-4">
+                                        <div style="font-size: 4rem;">🐼</div>
+                                    </div>
+                
+                                    <!-- Profile details in grid -->
+                                    <div class="row g-3 text-start">
+                                        <div class="col-12">
+                                            <strong>Email:</strong> ahraza1999@gmail.com
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <strong>I teach:</strong> English
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <strong>I'm learning:</strong> German
+                                        </div>
+                                        <div class="col-12">
+                                            <strong>Bio:</strong> My name is Hasan I love German and can teach English
+                                        </div>
+                                    </div>
+                
+                                    <!-- Action buttons -->
+                                    <div class="mt-4 d-flex gap-2 justify-content-center">
+                                        <button class="btn btn-success">Find My Best Matches</button>
+                                        <button class="btn btn-outline-danger">Log Out</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
-                        <div class="p-4 border rounded h-100">
-                            <h5>👥 Recent Matches</h5>
-                            <ul class="list-unstyled" id="recent-matches">
-                                <li>• 🐱 Leo (Spanish)</li>
-                                <li>• 🦉 Sarah (French)</li>
-                                <li>• 🐼 Aisha (Arabic)</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Recent partners section -->
-                    <div class="col-md-6 mt-4" data-aos="fade-up" data-aos-delay="150">
-                        <div class="p-4 border rounded h-100">
-                            <h5>👀 Recently Viewed Partners</h5>
-                            <div id="recently-viewed">
-                                <p>You haven't viewed any partners yet.</p>
+                
+                    <!-- Quick Stats -->
+                    <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card h-100 d-flex">
+                            <div class="card-header">
+                                <h5 class="mb-0">📊 Quick Stats</h5>
+                            </div>
+                            <div class="card-body p-4 d-flex flex-column justify-content-center">
+                                <div class="row text-center mb-4">
+                                    <div class="col-6 border-end">
+                                        <div class="h3 text-primary mb-1">12</div>
+                                        <small class="text-muted">Conversations</small>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="h3 text-success mb-1">5</div>
+                                        <small class="text-muted">Partners</small>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="h4 text-warning mb-1">45m</div>
+                                    <small class="text-muted">This week</small>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Progress Chart section -->
-                    <div class="col-md-6 mt-4" data-aos="fade-up" data-aos-delay="200">
-                        <div class="p-4 border rounded h-100">
-                            <h5>📊 Your Progress</h5>
-                            <canvas id="progressChart"></canvas>
+                
+                    <!-- Recent Matches -->
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="mb-0">👥 Recent Matches</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                                    <span class="me-3" style="font-size: 1.5rem;">🐱</span>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-medium">Leo</div>
+                                        <small class="text-muted">Spanish • Active 2h ago</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">Message</button>
+                                </div>
+                
+                                <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                                    <span class="me-3" style="font-size: 1.5rem;">🦉</span>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-medium">Sarah</div>
+                                        <small class="text-muted">French • Online now</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">Message</button>
+                                </div>
+                
+                                <div class="d-flex align-items-center">
+                                    <span class="me-3" style="font-size: 1.5rem;">🐼</span>
+                                    <div class="flex-grow-1">
+                                        <div class="fw-medium">Aisha</div>
+                                        <small class="text-muted">Arabic • Active 1d ago</small>
+                                    </div>
+                                    <button class="btn btn-sm btn-outline-primary">Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Recently Viewed -->
+                    <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                <h5 class="mb-0">👀 Recently Viewed</h5>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div id="recently-viewed" class="flex-grow-1">
+                                    <ul class="list-unstyled mb-0">
+                                        <li class="mb-2">• 🐵 Emma (Spanish)</li>
+                                        <li class="mb-2">• 🐰 Anna (Italian)</li>
+                                        <li class="mb-2">• 🐻 David (German)</li>
+                                        <li class="mb-0">• 🐸 Maria (Spanish)</li>
+                                    </ul>
+                                </div>
+                                <a href="browse.html" class="btn btn-sm btn-primary mt-3">Browse Partners</a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <!-- Progress Chart -->
+                    <div class="col-12" data-aos="fade-up" data-aos-delay="250">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">📈 Learning Progress</h5>
+                                    <small class="text-muted">This month</small>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-6">
+                                        <div style="max-width: 300px; margin: 0 auto;">
+                                            <canvas id="progressChart" width="300" height="300"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="text-center">
+                                            <h4 class="text-primary mb-3">65%</h4>
+                                            <p class="text-muted mb-3">Goals completed</p>
+                                            <div class="progress mb-3" style="height: 10px;">
+                                                <div class="progress-bar" style="width: 65%"></div>
+                                            </div>
+                                            <small class="text-muted">13 of 20 sessions</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
